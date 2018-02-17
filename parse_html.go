@@ -80,14 +80,22 @@ func parse_html(input string) [][]string {
 		log.Fatal(err)
 	}
 
+	ret := [][]string{}
+
 	rTag := findReqd(doc, tableTag)
+
+    if rTag == nil || rTag.LastChild == nil {
+        return ret
+    }
 
 	tbody := rTag.LastChild
 	rows := element_node_children(tbody)
 
-	ret := [][]string{}
-
     log.Print("Found total ", len(rows), " rows. Proceeding!")
+
+    if len(rows) == 0 {
+        return ret
+    }
 
 	for _, c := range rows {
 		kids := element_node_children(c)

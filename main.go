@@ -18,19 +18,56 @@ func main() {
 
 	err := godotenv.Load()
 
-	if err != nil {
-		log.Print("Couldn't load env variables from .env")
-	}
+    if err != nil {
+        log.Print("Couldn't load env variables from .env")
+    }
 
-	departments := []string{
+    departments := []string{
         "AE",
+        "AG",
         "AR",
-        "CS",
-        "ME",
-        "MA",
+        "AT",
+        "BE",
+        "BM",
+        "BS",
+        "BT",
+        "CD",
+        "CE",
         "CH",
+        "CL",
+        "CR",
+        "CS",
+        "CY",
+        "DE",
         "EC",
         "EE",
+        "EF",
+        "ES",
+        "ET",
+        "GG",
+        "GS",
+        "HS",
+        "ID",
+        "IM",
+        "IP",
+        "IT",
+        "MA",
+        "ME",
+        "MI",
+        "MM",
+        "MS",
+        "MT",
+        "NA",
+        "NT",
+        "PH",
+        "RD",
+        "RE",
+        "RJ",
+        "RT",
+        "RX",
+        "SL",
+        "TS",
+        "WM",
 	}
 
     allSubjects := make(map[string][][]string)
