@@ -5,11 +5,17 @@ import (
     "github.com/joho/godotenv"
     "io/ioutil"
     "encoding/json"
-    "time"
     "os"
-    "fmt"
+    // "fmt"
 )
+
+type ParsedResult struct{
+    Subjects [][]string
+    Department string
+}
+
 func main() {
+
 	err := godotenv.Load()
 
 	if err != nil {
@@ -17,42 +23,62 @@ func main() {
 	}
 
 	departments := []string{
-        "AE",
-        "AR",
+        // "AE",
+        // "AR",
         "CS",
         "ME",
 	}
 
-    type ParsedResult struct{
-        Subjects [][]string
-        Department string
-    }
+    allSubjects := make(map[string][][]string)
 
-    accumulate_channel := make(chan ParsedResult)
+    _, err = os.Stat("all_subjects.json")
+    no_file := err != nil
 
-	for _, v := range departments {
-        dep := v
-        go func() {
-            t := parse_html(dep_timetable(dep))
-            log.Printf("Found %d subjects in department %s", len(t), dep)
-            accumulate_channel <- ParsedResult{t, dep}
-        }()
-	}
+    if no_file {
 
-    for i := 0; i < len(departments); i++ {
-        some_val := <-accumulate_channel
-        log.Printf("Fetch completed for department %s with %d subjects",
-                            some_val.Department,
-                            len(some_val.Subjects))
+        accumulate_channel := make(chan ParsedResult)
 
-        b, err := json.Marshal(some_val.Subjects)
+        for _, v := range departments {
+            dep := v
+            go func() {
+                t := parse_html(dep_timetable(dep))
+                log.Printf("Found %d subjects in department %s", len(t), dep)
+                accumulate_channel <- ParsedResult{t, dep}
+            }()
+        }
+
+        for i := 0; i < len(departments); i++ {
+            dep_val := <-accumulate_channel
+            log.Printf("Fetch completed for department %s with %d subjects",
+            dep_val.Department,
+            len(dep_val.Subjects))
+
+            allSubjects[dep_val.Department] = dep_val.Subjects
+        }
+
+        b, err := json.Marshal(allSubjects)
         if err != nil {
             b = []byte("")
         }
 
-        err = ioutil.WriteFile(fmt.Sprintf("%s.json", some_val.Department), b, 0644)
+        err = ioutil.WriteFile("all_subjects.json", b, 0644)
         if err != nil {
-            log.Printf("Could not write %s.json to file: %v", some_val.Department, err)
+            log.Printf("Could not write subjects.json to file: %v", err)
+        }
+    } else {
+        b, err := ioutil.ReadFile("all_subjects.json")
+        if err != nil {
+            log.Fatal(err)
+        }
+
+        err = json.Unmarshal(b, &allSubjects)
+        if err != nil {
+            log.Fatal(err)
         }
     }
+
+    transformedMap := change_map_structure(allSubjects)
+    log.Print(transformedMap)
+
+    build_room_schedule(transformedMap)
 }
