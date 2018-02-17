@@ -23,10 +23,14 @@ func main() {
 	}
 
 	departments := []string{
-        // "AE",
-        // "AR",
+        "AE",
+        "AR",
         "CS",
         "ME",
+        "MA",
+        "CH",
+        "EC",
+        "EE",
 	}
 
     allSubjects := make(map[string][][]string)
@@ -80,5 +84,14 @@ func main() {
     transformedMap := change_map_structure(allSubjects)
     log.Print(transformedMap)
 
-    build_room_schedule(transformedMap)
+    schedule := build_room_schedule(transformedMap)
+    b, err := json.Marshal(schedule)
+    if err != nil {
+        log.Fatal("Could not marshal schedule to JSON: ", err)
+    }
+    err = ioutil.WriteFile("schedule.json", b, 0644)
+
+    if err != nil {
+        log.Fatal("Could not write to schedule.json: ", err)
+    }
 }
