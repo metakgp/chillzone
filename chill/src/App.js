@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Chillzone</h1>
+          <h1>Chillzone &middot; IIT Kharagpur</h1>
           <h3>Find a place to chill, NOW!</h3>
         </header>
           {Object.keys(this.props.schedule).map(key => {

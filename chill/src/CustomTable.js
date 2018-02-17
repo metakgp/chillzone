@@ -17,7 +17,9 @@ class CustomTable extends Component {
       </h1>
       <Table striped bordered condensed hover>
         <thead>
-          <tr>
+        <tr>
+          <th>
+          </th>
           <th>
           8 am - 9 am
           </th>
@@ -48,8 +50,8 @@ class CustomTable extends Component {
           </tr>
         </thead>
         <tbody>
-        {this.props.schedule.map(k => {
-          return <GenerateCustomTR schedule={k} />
+        {this.props.schedule.map((k, ind) => {
+          return <GenerateCustomTR schedule={k} day={ind} />
           })}
         </tbody>
         </Table>

@@ -1,14 +1,26 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Alert } from 'react-bootstrap'
 
 class GenerateCustomTR extends Component {
-  static PropTypes = {
-    schedule: PropTypes.object
+  constructor() {
+    super()
+    this.DayNames = [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday'
+    ];
   }
 
+  static PropTypes = {
+    schedule: PropTypes.object.isRequired,
+    day: PropTypes.number.isRequired
+  }
+
+
   getTextToDisplay(k) {
-    return k === 0 ? "EMPTY" : "TAKEN";
+    return k === 0 ? (<b>EMPTY</b>) : "TAKEN";
   }
 
   getAlertLevel(k) {
@@ -18,13 +30,16 @@ class GenerateCustomTR extends Component {
   render() {
     return (
       <tr>
+        <td>
+          <b>
+            {this.DayNames[this.props.day]}
+          </b>
+        </td>
         {this.props.schedule.map(k => {
           return (
-            <td>
-            <Alert bsStyle={this.getAlertLevel(k)}>
+            <td class={this.getAlertLevel(k)}>
               {this.getTextToDisplay(k)}
-            </Alert>
-          </td>
+            </td>
           )
         })}
       </tr>
