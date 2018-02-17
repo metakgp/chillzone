@@ -5,16 +5,16 @@ import (
     "strings"
 )
 
-func build_room_schedule(subs map[string][]map[string]string) map[string][][]int {
+func build_room_schedule(subs map[string][]map[string]string) map[string][][]string {
 
-    sched := make(map[string][][]int)
+    sched := make(map[string][][]string)
     for _, k := range rooms {
-        sched[k] = [][]int{}
+        sched[k] = [][]string{}
 
         for i := 0; i < 5; i++ {
-            sched[k] = append(sched[k], []int{})
+            sched[k] = append(sched[k], []string{})
             for j := 0; j < 9; j++ {
-                sched[k][i] = append(sched[k][i], 0)
+                sched[k][i] = append(sched[k][i], "")
             }
         }
 
@@ -40,7 +40,7 @@ func build_room_schedule(subs map[string][]map[string]string) map[string][][]int
                             log.Printf("Room not found in the existing list: %s", r)
                             room_not_found = append(room_not_found, r)
                         } else {
-                            sched[r][comps[0]][comps[1]] = 1
+                            sched[r][comps[0]][comps[1]] = sub["Code"]
                         }
                     }
                 }

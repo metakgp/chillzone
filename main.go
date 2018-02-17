@@ -84,13 +84,22 @@ func main() {
     transformedMap := change_map_structure(allSubjects)
     log.Print(transformedMap)
 
+    subjectDetails := build_subject_details(transformedMap)
+    b, err := json.Marshal(subjectDetails)
+    if err != nil {
+        log.Fatal("Could not marshal subjectDetails to JSON: ", err)
+    }
+    err = ioutil.WriteFile("subjectDetails.json", b, 0644)
+    if err != nil {
+        log.Fatal("Could not write to subjectDetails.json: ", err)
+    }
+
     schedule := build_room_schedule(transformedMap)
-    b, err := json.Marshal(schedule)
+    b, err = json.Marshal(schedule)
     if err != nil {
         log.Fatal("Could not marshal schedule to JSON: ", err)
     }
     err = ioutil.WriteFile("schedule.json", b, 0644)
-
     if err != nil {
         log.Fatal("Could not write to schedule.json: ", err)
     }

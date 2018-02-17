@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Tooltip, OverlayTrigger } from 'react-bootstrap';
+import subjectDetails from './subjectDetails.json';
 
 class GenerateCustomTR extends Component {
   constructor() {
@@ -20,11 +22,19 @@ class GenerateCustomTR extends Component {
 
 
   getTextToDisplay(k) {
-    return k === 0 ? (<b>EMPTY</b>) : "TAKEN";
+    return k === "" ? (<b>EMPTY</b>) : (
+            <OverlayTrigger
+              overlay={<Tooltip id="tooltip-id">{subjectDetails[k]}</Tooltip>}
+              placement="top">
+              <span>
+              {k}
+              </span>
+            </OverlayTrigger>
+          );
   }
 
   getAlertLevel(k) {
-    return k === 0 ? "success" : "danger";
+    return k === "" ? "success" : "danger";
   }
 
   render() {
