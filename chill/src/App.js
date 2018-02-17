@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import CustomTable from './CustomTable.js';
 import PropTypes from 'prop-types';
@@ -12,16 +11,12 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React (testing)</h1>
+          <h1 className="App-title">Chillzone</h1>
+          <h3>Find a place to chill, NOW!</h3>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-          </p>
           {Object.keys(this.props.schedule).map(key => {
             return <CustomTable room={key} schedule={this.props.schedule[key]} />
           })}
-
       </div>
     );
   }

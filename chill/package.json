@@ -5,6 +5,7 @@
   "dependencies": {
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
+    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
     "react-scripts": "1.1.1",
     "react-table": "^6.7.6"
