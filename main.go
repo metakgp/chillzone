@@ -1,143 +1,145 @@
 package main
 
 import (
-    "log"
-    "github.com/joho/godotenv"
-    "io/ioutil"
-    "encoding/json"
-    "os"
-    // "fmt"
+	"encoding/json"
+	"github.com/joho/godotenv"
+	"io/ioutil"
+	"log"
+	"os"
+	// "fmt"
 )
 
-type ParsedResult struct{
-    Subjects [][]string
-    Department string
+type ParsedResult struct {
+	Subjects   [][]string
+	Department string
 }
 
 func main() {
 
 	err := godotenv.Load()
 
-    if err != nil {
-        log.Print("Couldn't load env variables from .env")
-    }
-
-    departments := []string{
-        "AE",
-        "AG",
-        "AR",
-        "AT",
-        "BE",
-        "BM",
-        "BS",
-        "BT",
-        "CD",
-        "CE",
-        "CH",
-        "CL",
-        "CR",
-        "CS",
-        "CY",
-        "DE",
-        "EC",
-        "EE",
-        "EF",
-        "ES",
-        "ET",
-        "GG",
-        "GS",
-        "HS",
-        "ID",
-        "IM",
-        "IP",
-        "IT",
-        "MA",
-        "ME",
-        "MI",
-        "MM",
-        "MS",
-        "MT",
-        "NA",
-        "NT",
-        "PH",
-        "RD",
-        "RE",
-        "RJ",
-        "RT",
-        "RX",
-        "SL",
-        "TS",
-        "WM",
+	if err != nil {
+		log.Print("Couldn't load env variables from .env")
 	}
 
-    allSubjects := make(map[string][][]string)
+	departments := []string{
+		"AE",
+		"AG",
+		"AR",
+		"AT",
+		"BE",
+		"BM",
+		"BS",
+		"BT",
+		"CD",
+		"CE",
+		"CH",
+		"CL",
+		"CR",
+		"CS",
+		"CY",
+		"DE",
+		"EC",
+		"EE",
+		"EF",
+		"ES",
+		"ET",
+		"GG",
+		"GS",
+		"HS",
+		"ID",
+		"IM",
+		"IP",
+		"IT",
+		"MA",
+		"ME",
+		"MI",
+		"MM",
+		"MS",
+		"MT",
+		"NA",
+		"NT",
+		"PH",
+		"RD",
+		"RE",
+		"RJ",
+		"RT",
+		"RX",
+		"SL",
+		"TS",
+		"WM",
+	}
 
-    _, err = os.Stat("all_subjects.json")
-    no_file := err != nil
+	allSubjects := make(map[string][][]string)
 
-    if no_file {
+	_, err = os.Stat("all_subjects.json")
+	no_file := err != nil
 
-        accumulate_channel := make(chan ParsedResult)
+	if no_file {
 
-        for _, v := range departments {
-            dep := v
-            go func() {
-                t := parse_html(dep_timetable(dep))
-                log.Printf("Found %d subjects in department %s", len(t), dep)
-                accumulate_channel <- ParsedResult{t, dep}
-            }()
-        }
+		accumulate_channel := make(chan ParsedResult)
 
-        for i := 0; i < len(departments); i++ {
-            dep_val := <-accumulate_channel
-            log.Printf("Fetch completed for department %s with %d subjects",
-            dep_val.Department,
-            len(dep_val.Subjects))
+		for _, v := range departments {
+			dep := v
+			go func() {
+				t := parse_html(dep_timetable(dep))
+				log.Printf("Found %d subjects in department %s", len(t), dep)
+				accumulate_channel <- ParsedResult{t, dep}
+			}()
+		}
 
-            allSubjects[dep_val.Department] = dep_val.Subjects
-        }
+		for i := 0; i < len(departments); i++ {
+			dep_val := <-accumulate_channel
+			log.Printf("Fetch completed for department %s with %d subjects",
+				dep_val.Department,
+				len(dep_val.Subjects))
 
-        b, err := json.Marshal(allSubjects)
-        if err != nil {
-            b = []byte("")
-        }
+			allSubjects[dep_val.Department] = dep_val.Subjects
+		}
 
-        err = ioutil.WriteFile("all_subjects.json", b, 0644)
-        if err != nil {
-            log.Printf("Could not write subjects.json to file: %v", err)
-        }
-    } else {
-        b, err := ioutil.ReadFile("all_subjects.json")
-        if err != nil {
-            log.Fatal(err)
-        }
+		b, err := json.Marshal(allSubjects)
+		if err != nil {
+			b = []byte("")
+		}
 
-        err = json.Unmarshal(b, &allSubjects)
-        if err != nil {
-            log.Fatal(err)
-        }
-    }
+		err = ioutil.WriteFile("all_subjects.json", b, 0644)
+		if err != nil {
+			log.Printf("Could not write subjects.json to file: %v", err)
+		}
+	} else {
+		b, err := ioutil.ReadFile("all_subjects.json")
+		if err != nil {
+			log.Fatal(err)
+		}
 
-    transformedMap := change_map_structure(allSubjects)
-    log.Print(transformedMap)
+		err = json.Unmarshal(b, &allSubjects)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
 
-    subjectDetails := build_subject_details(transformedMap)
-    b, err := json.Marshal(subjectDetails)
-    if err != nil {
-        log.Fatal("Could not marshal subjectDetails to JSON: ", err)
-    }
-    err = ioutil.WriteFile("subjectDetails.json", b, 0644)
-    if err != nil {
-        log.Fatal("Could not write to subjectDetails.json: ", err)
-    }
+	transformedMap := change_map_structure(allSubjects)
+	log.Print(transformedMap)
 
-    schedule := build_room_schedule(transformedMap)
-    b, err = json.Marshal(schedule)
-    if err != nil {
-        log.Fatal("Could not marshal schedule to JSON: ", err)
-    }
-    err = ioutil.WriteFile("schedule.json", b, 0644)
-    if err != nil {
-        log.Fatal("Could not write to schedule.json: ", err)
-    }
+	subjectDetails := build_subject_details(transformedMap)
+	b, err := json.Marshal(subjectDetails)
+	if err != nil {
+		log.Fatal("Could not marshal subjectDetails to JSON: ", err)
+	}
+	err = ioutil.WriteFile("subjectDetails.json", b, 0644)
+	if err != nil {
+		log.Fatal("Could not write to subjectDetails.json: ", err)
+	}
+
+	schedule := build_room_schedule(transformedMap)
+	b, err = json.Marshal(schedule)
+	if err != nil {
+		log.Fatal("Could not marshal schedule to JSON: ", err)
+	}
+	err = ioutil.WriteFile("schedule.json", b, 0644)
+	if err != nil {
+		log.Fatal("Could not write to schedule.json: ", err)
+	}
+
+	build_empty_schedule(transformedMap)
 }
