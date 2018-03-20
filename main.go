@@ -141,5 +141,13 @@ func main() {
 		log.Fatal("Could not write to schedule.json: ", err)
 	}
 
-	build_empty_schedule(transformedMap)
+	empty_schedule := build_empty_schedule(schedule)
+	b, err = json.Marshal(empty_schedule)
+	if err != nil {
+		log.Fatal("Couldn't convert empty schedule to JSON: ", err)
+	}
+	err = ioutil.WriteFile("empty_schedule.json", b, 0644)
+	if err != nil {
+		log.Fatal("Couldn't write the empty schedule JSON to file: ", err)
+	}
 }
