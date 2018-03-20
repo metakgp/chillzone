@@ -1,0 +1,860 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script language='JavaScript' type='text/javascript' src='./build/common.js'></script>
+
+
+
+<script>
+    function getDept()
+    {
+
+        document.frm.method="POST"    ;
+        document.frm.action="timetable_track.jsp?action=second&dept="+document.getElementById('dept').value;
+        document.frm.submit();
+    }
+
+    function openWin()
+    {
+        // window.open("view/slot_info.jsp","mywindow","menubar=1,resizable=1,width=1000,height=1000");
+        window.open("view/slot_info.jsp");
+    }
+
+
+
+    function changeSemester(val){
+        var curSes =document.getElementById('for_session').value;
+        var curSem =document.getElementById('for_semester').value;
+        if(val=='N'){
+            if(curSem=='SPRING'){
+                document.getElementById('for_semester').value='AUTUMN';
+                var year=curSes.split('-');
+                var nextSem=year[1]+'-'+(parseInt(year[1])+1);
+                document.getElementById('for_session').value=nextSem;
+            }else{
+                document.getElementById('for_semester').value='SPRING';
+            }
+        }else if(val=='P'){
+            if(curSem=='AUTUMN'){
+                document.getElementById('for_semester').value='SPRING';
+                var year=curSes.split('-');
+                var prevSem=(parseInt(year[0])-1)+'-'+year[0];
+                document.getElementById('for_session').value=prevSem;
+            }else{
+                document.getElementById('for_semester').value='AUTUMN';
+            }
+        }
+        //recall();
+        //   submitForm();
+    }
+ function printInfo(elementid,styleSheetHref){
+        var prtContent="<html><head>";
+        if(typeof styleSheetHref != 'undefined'){
+            prtContent+="<link rel='StyleSheet' href='"+styleSheetHref+"' />";
+        }
+        prtContent+="</head><body>";
+        prtContent+=document.getElementById(elementid).innerHTML;
+        prtContent+="</body>";
+        //alert(prtContent);
+        var WinPrint =window.open('','','left=0,top=0,width=1,height=1,toolbar=0,scrollbars=0,status=0');
+        WinPrint.document.write(prtContent);
+        WinPrint.document.close();
+        WinPrint.focus();
+        WinPrint.print();
+        WinPrint.close();
+    }
+</script>
+
+<html>
+    <head>
+
+        <link rel='StyleSheet' href='./css/style1.css' />
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+        <title>JSP Page</title>
+    </head>
+    <body onload="save()"><TABLE align="center"><TR><TD><form name="frm" action="timetable_track.jsp?action=second" method="post">
+                        <table align="center" border="0" cellpadding="0" cellspacing="0" width="80%"><tr><td>
+
+                                    
+                                              <input type="button" class="button" value=" Print " onclick="printInfo('printIt','./css/style1.css')"/>
+                  <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                        <tr>
+                                            <td align="left"><b>Department : ME</b></td>
+                                            <td align="right"><a href="timetable_track.jsp?action=first">Back</a></td>
+                                        </tr></table>
+                    </td></tr>
+                    <tr><td>
+                    
+            <div id="printIt">      <table align="center" border="0">
+            <tr>
+            <td valign="top">
+            <table id=disptab border=1 style='border-color:#557CD7' cellspacing=0 cellpadding=3 align="center">
+            <tr><td colspan="7"><center><b>List Of Subjects Allocated</b></center></td></tr>
+             <tr>
+            <th>Subject No</th>
+            <th>Subject Name</th>
+            <th>Faculty Name</th>
+            <th>Ltp</th>
+            <th>Credits</th>
+
+                    
+                    <th>Slot</th>
+        <th>Room</th>
+
+           
+                                                    <tr><td>ME10001</td>
+                                                        <td>MECHANICS</td>
+                                                        <td>ARGHYA DEB,Arun Kumar Samantaray,Goutam Chakraborty,Kingshook Bhattacharyya,Debarghya Chakraborty,Manas Kumar Laha,Atul Jain,NAVTEJ SINGH</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                    <td>--</td>
+                                    
+                                                    <tr><td>ME19001</td>
+                                                        <td>INTRODUCTION TO MANUFACTURING PROCESSES</td>
+                                                        <td>Ajay Muljibhai Sidpara,Sushanta Kumar Panda,Surjya Kanta Pal,Sankha Deb,Partha Saha,Vikranth Racherla,Jinu Paul,Asimava Roy Choudhury</td>
+                                                        <td>0-0-3</td>
+                                                        <td>2</td>
+                                                        
+                                    <td>--</td>
+                                    
+                                                    <tr><td>ME21004</td>
+                                                        <td>THERMO-FLUID SCIENCE</td>
+                                                        <td>Jeevanjyoti Chakraborty,Somnath Roy</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>F4</td>
+                                   <td>NR321</td>
+                                   
+                                                    <tr><td>ME21008</td>
+                                                        <td>KINEMATICS  OF MACHINES</td>
+                                                        <td>Kingshook Bhattacharyya,Anirvan Dasgupta</td>
+                                                        <td>3-0-0</td>
+                                                        <td>3</td>
+                                                        
+                                   <td>E3</td>
+                                   <td>NR321</td>
+                                   
+                                                    <tr><td>ME21010</td>
+                                                        <td>GEOMETRIC MODELLING FOR DESIGN AND MANUFACTURE</td>
+                                                        <td>Cheruvu Siva Kumar</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>D4</td>
+                                   <td></td>
+                                   
+                                                    <tr><td>ME22002</td>
+                                                        <td>THERMODYNAMICS</td>
+                                                        <td>S Ramanujam,Aditya Bandopadhyay,Sourav Mitra,Sukanta Kumar Dash</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>F4</td>
+                                   <td>NR323,NR324,NR423,NR424,NR323,NR324,NR423,NR424</td>
+                                   
+                                                    <tr><td>ME22004</td>
+                                                        <td>DYNAMICS OF MACHINES</td>
+                                                        <td>Kumar Ray</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>E4</td>
+                                   <td>NR322</td>
+                                   
+                                                    <tr><td>ME29002</td>
+                                                        <td>MECHANISM SESSIONAL</td>
+                                                        <td>Anirvan Dasgupta</td>
+                                                        <td>0-0-3</td>
+                                                        <td>2</td>
+                                                        
+                                   <td>P, N</td>
+                                   <td>MED307, S301</td>
+                                   
+                                                    <tr><td>ME30602</td>
+                                                        <td>DESIGN OF MACHINE ELEMENTS</td>
+                                                        <td>Vikranth Racherla,Sovan Lal Das</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>C4</td>
+                                   <td>NC241,NC242</td>
+                                   
+                                                    <tr><td>ME30604</td>
+                                                        <td>MACHINES TOOLS AND MACHINING</td>
+                                                        <td>Soumitra Paul,Sankha Deb,Partha Pratim Bandyopadhyay</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>F4</td>
+                                   <td>NC241,NC242,NR243</td>
+                                   
+                                                    <tr><td>ME30606</td>
+                                                        <td>DYNAMICS OF MACHINES</td>
+                                                        <td>Kumar Ray</td>
+                                                        <td>3-0-0</td>
+                                                        <td>3</td>
+                                                        
+                                   <td>E3</td>
+                                   <td>0</td>
+                                   
+                                                    <tr><td>ME30608</td>
+                                                        <td>APPLIED THERMOFLUIDS - I</td>
+                                                        <td>Subhransu Roy,Manab Kumar Das</td>
+                                                        <td>3-0-0</td>
+                                                        <td>3</td>
+                                                        
+                                   <td>D3</td>
+                                   <td>0</td>
+                                   
+                                                    <tr><td>ME39602</td>
+                                                        <td>MACHINE DESIGN PRACTICE</td>
+                                                        <td>Sovan Lal Das,Rathindranath Maiti,Mihir Sarangi</td>
+                                                        <td>0-0-3</td>
+                                                        <td>2</td>
+                                                        
+                                   <td>X4, J</td>
+                                   <td>0, S302</td>
+                                   
+                                                    <tr><td>ME39604</td>
+                                                        <td>MACHINES TOOLS AND MACHINING LAB.</td>
+                                                        <td>Ajay Muljibhai Sidpara,Soumitra Paul,Surjya Kanta Pal,Sankha Deb,Sushanta Kumar Panda,Jinu Paul,Partha Pratim Bandyopadhyay</td>
+                                                        <td>0-0-3</td>
+                                                        <td>2</td>
+                                                        
+                                   <td>P, L, N, J</td>
+                                   <td>0</td>
+                                   
+                                                    <tr><td>ME39606</td>
+                                                        <td>THERMO FLUIDS LAB. - I</td>
+                                                        <td>S Ramanujam,Chirag Deepak Kalelkar,Rajaram Lakkaraju,Maddali Ramgopal,Dhananjay Kumar Srivastava,Sandipan Ghosh Moulic</td>
+                                                        <td>0-0-3</td>
+                                                        <td>2</td>
+                                                        
+                                   <td>X4, J</td>
+                                   <td>0</td>
+                                   
+                                                    <tr><td>ME40402</td>
+                                                        <td>FINITE ELEMENT METHODS IN ENGINEERING</td>
+                                                        <td>Biswajit Maiti</td>
+                                                        <td>3-0-0</td>
+                                                        <td>3</td>
+                                                        
+                                   <td>A3</td>
+                                   <td>ME303</td>
+                                   
+                                                    <tr><td>ME41001</td>
+                                                        <td>APPLIED THERMO-FLUIDS I</td>
+                                                        <td>Manab Kumar Das,Subhransu Roy</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>D4</td>
+                                   <td>NC234</td>
+                                   
+                                                    <tr><td>ME41606</td>
+                                                        <td>FINITE ELEMENT METHODS IN ENGINEERING</td>
+                                                        <td>Biswajit Maiti</td>
+                                                        <td>3-0-0</td>
+                                                        <td>3</td>
+                                                        
+                                   <td>A3</td>
+                                   <td>NC141</td>
+                                   
+                                                    <tr><td>ME41616</td>
+                                                        <td>MICRO-SCALE FLUID FLOW AND HEAT TRANSFER</td>
+                                                        <td>Suman Chakraborty</td>
+                                                        <td>3-0-0</td>
+                                                        <td>3</td>
+                                                        
+                                   <td>A3</td>
+                                   <td>NC234</td>
+                                   
+                                                    <tr><td>ME47601</td>
+                                                        <td>PROJECT-I</td>
+                                                        <td>Manas Chandra Ray,Anandaroop Bhattacharya,Sankha Deb,Partha Saha,Atul Jain</td>
+                                                        <td>0-0-6</td>
+                                                        <td>4</td>
+                                                        
+                                    <td>--</td>
+                                    
+                                                    <tr><td>ME47602</td>
+                                                        <td>PROJECT-II</td>
+                                                        <td>Anandaroop Bhattacharya,Manas Chandra Ray,Sankha Deb,Partha Saha,Atul Jain</td>
+                                                        <td>0-0-9</td>
+                                                        <td>6</td>
+                                                        
+                                    <td>--</td>
+                                    
+                                                    <tr><td>ME48002</td>
+                                                        <td>COMPREHENSIVE VIVA</td>
+                                                        <td>S Ramanujam</td>
+                                                        <td>0-0-0</td>
+                                                        <td>2</td>
+                                                        
+                                    <td>--</td>
+                                    
+                                                    <tr><td>ME48601</td>
+                                                        <td>INDUSTRIAL TRAINING</td>
+                                                        <td>Mihir Sarangi,Jinu Paul</td>
+                                                        <td>0-0-0</td>
+                                                        <td>2</td>
+                                                        
+                                    <td>--</td>
+                                    
+                                                    <tr><td>ME48602</td>
+                                                        <td>COMPREHENSIVE VIVA</td>
+                                                        <td>S Ramanujam</td>
+                                                        <td>0-0-0</td>
+                                                        <td>2</td>
+                                                        
+                                    <td>--</td>
+                                    
+                                                    <tr><td>ME48701</td>
+                                                        <td>SUMMER TRAINING</td>
+                                                        <td>Mihir Sarangi,Jinu Paul</td>
+                                                        <td>0-0-0</td>
+                                                        <td>2</td>
+                                                        
+                                    <td>--</td>
+                                    
+                                                    <tr><td>ME57001</td>
+                                                        <td>PROJECT</td>
+                                                        <td>Sanjay Gupta,Partha Saha,Sati Nath Bhattacharyya</td>
+                                                        <td>0-0-0</td>
+                                                        <td>10</td>
+                                                        
+                                    <td>--</td>
+                                    
+                                                    <tr><td>ME57002</td>
+                                                        <td>PROJECT</td>
+                                                        <td>Sanjay Gupta,Partha Saha,Sati Nath Bhattacharyya</td>
+                                                        <td>0-0-0</td>
+                                                        <td>15</td>
+                                                        
+                                    <td>--</td>
+                                    
+                                                    <tr><td>ME57003</td>
+                                                        <td>DUAL DEGREE PROJECT - PART I</td>
+                                                        <td>Sanjay Gupta,Partha Saha,Sati Nath Bhattacharyya</td>
+                                                        <td>0-0-18</td>
+                                                        <td>12</td>
+                                                        
+                                    <td>--</td>
+                                    
+                                                    <tr><td>ME57004</td>
+                                                        <td>DUAL DEGREE PROJECT - PART II</td>
+                                                        <td>Sanjay Gupta,Sati Nath Bhattacharyya,Partha Saha</td>
+                                                        <td>0-0-20</td>
+                                                        <td>13</td>
+                                                        
+                                    <td>--</td>
+                                    
+                                                    <tr><td>ME58002</td>
+                                                        <td>COMPREHENSIVEVIVA VOCE</td>
+                                                        <td>S Ramanujam,Partha Saha,Sati Nath Bhattacharyya,Sanjay Gupta</td>
+                                                        <td>0-0-0</td>
+                                                        <td>2</td>
+                                                        
+                                    <td>--</td>
+                                    
+                                                    <tr><td>ME58003</td>
+                                                        <td>COMPREHENSIVE VIVA (UG)</td>
+                                                        <td>S Ramanujam</td>
+                                                        <td>0-0-0</td>
+                                                        <td>2</td>
+                                                        
+                                    <td>--</td>
+                                    
+                                                    <tr><td>ME58004</td>
+                                                        <td>COMPREHENSIVE VIVA (DD)</td>
+                                                        <td>S Ramanujam,Partha Saha,Sati Nath Bhattacharyya,Sanjay Gupta</td>
+                                                        <td>0-0-0</td>
+                                                        <td>2</td>
+                                                        
+                                    <td>--</td>
+                                    
+                                                    <tr><td>ME60006</td>
+                                                        <td>FUNDAMENTALS OF ELECTRONIC PACKAGING</td>
+                                                        <td>Anandaroop Bhattacharya</td>
+                                                        <td>3-0-0</td>
+                                                        <td>3</td>
+                                                        
+                                   <td>D3</td>
+                                   <td>NR423</td>
+                                   
+                                                    <tr><td>ME60012</td>
+                                                        <td>COMPUTATIONAL FLUID DYNAMICS</td>
+                                                        <td>Sati Nath Bhattacharyya</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>S3, G3</td>
+                                   <td>NC234</td>
+                                   
+                                                    <tr><td>ME60014</td>
+                                                        <td>CONVECTIVE HEAT AND MASS TRANSFER</td>
+                                                        <td>Sandipan Ghosh Moulic</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>C4</td>
+                                   <td>NC234</td>
+                                   
+                                                    <tr><td>ME60032</td>
+                                                        <td>MONITORING AND CONTROLLING OF MANUFACTURING SYSTEMS</td>
+                                                        <td>Ajay Muljibhai Sidpara,Asimava Roy Choudhury</td>
+                                                        <td>3-0-0</td>
+                                                        <td>3</td>
+                                                        
+                                   <td>F3</td>
+                                   <td>NC441,NC441</td>
+                                   
+                                                    <tr><td>ME60064</td>
+                                                        <td>NONLINEAR VIBRATION</td>
+                                                        <td>Kumar Ray</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                    <td>--</td>
+                                    
+                                                    <tr><td>ME60086</td>
+                                                        <td>WASTE HEAT RECOVERY</td>
+                                                        <td>Anandaroop Bhattacharya,Prasanta Kumar Das</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>U4</td>
+                                   <td>0</td>
+                                   
+                                                    <tr><td>ME60088</td>
+                                                        <td>COMPRESSIBLE FLOW</td>
+                                                        <td>Subhransu Roy</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                    <td>--</td>
+                                    
+                                                    <tr><td>ME60096</td>
+                                                        <td>AIR CONDITIONING AND VENTILATION</td>
+                                                        <td>Maddali Ramgopal</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>D4</td>
+                                   <td>ME304</td>
+                                   
+                                                    <tr><td>ME60098</td>
+                                                        <td>GAS TURBINES AND JET PROPULSION</td>
+                                                        <td>Abhijit Guha</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>F4</td>
+                                   <td>ME306</td>
+                                   
+                                                    <tr><td>ME60110</td>
+                                                        <td>MECHANICAL DRIVES</td>
+                                                        <td>Rathindranath Maiti</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>S3, A3</td>
+                                   <td>NC331</td>
+                                   
+                                                    <tr><td>ME60134</td>
+                                                        <td>NUMERICAL MODELLING OF MANUFACTURING PROCESSES</td>
+                                                        <td>Vikranth Racherla</td>
+                                                        <td>4-0-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>D4</td>
+                                   <td>NC443</td>
+                                   
+                                                    <tr><td>ME60136</td>
+                                                        <td>TWO PHASE FLOW</td>
+                                                        <td>Prasanta Kumar Das,Rajaram Lakkaraju</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>F4</td>
+                                   <td>ME304</td>
+                                   
+                                                    <tr><td>ME60232</td>
+                                                        <td>THEORY OF COMBUSTION AND EMISSIONS</td>
+                                                        <td>Vanteru Mahendra Reddy</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>S3, B3</td>
+                                   <td>ME303</td>
+                                   
+                                                    <tr><td>ME60234</td>
+                                                        <td>ENERGY CONSERVATION AND WASTE HEAT RECOVERY</td>
+                                                        <td>Prasanta Kumar Das,Anandaroop Bhattacharya</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>U4</td>
+                                   <td>NC234</td>
+                                   
+                                                    <tr><td>ME60302</td>
+                                                        <td>LASER PROCESSING OF MATERIALS</td>
+                                                        <td>Ashish Kumar Nath</td>
+                                                        <td>4-0-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>S3, G3</td>
+                                   <td>NC441</td>
+                                   
+                                                    <tr><td>ME60306</td>
+                                                        <td>PRECISION AND MICRO MANUFACTURING</td>
+                                                        <td>Ajay Muljibhai Sidpara,Jinu Paul</td>
+                                                        <td>3-0-0</td>
+                                                        <td>3</td>
+                                                        
+                                   <td>B3</td>
+                                   <td>NC431</td>
+                                   
+                                                    <tr><td>ME60310</td>
+                                                        <td>MICROFLUIDICS</td>
+                                                        <td>Suman Chakraborty</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>S3, A3</td>
+                                   <td>NC234</td>
+                                   
+                                                    <tr><td>ME60350</td>
+                                                        <td>METAL FORMING PROCESSES</td>
+                                                        <td>Sushanta Kumar Panda,Surjya Kanta Pal</td>
+                                                        <td>4-0-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>S3, A3</td>
+                                   <td>NC444,NC444</td>
+                                   
+                                                    <tr><td>ME60352</td>
+                                                        <td>ROBOTICS</td>
+                                                        <td>Dilip Kumar Pratihar</td>
+                                                        <td>4-0-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>C4</td>
+                                   <td>NC443</td>
+                                   
+                                                    <tr><td>ME60402</td>
+                                                        <td>ADVANCED MECHANICS OF SOLIDS</td>
+                                                        <td>Jeevanjyoti Chakraborty</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>S3, B3</td>
+                                   <td>NC234</td>
+                                   
+                                                    <tr><td>ME60404</td>
+                                                        <td>LUBRICATION AND ROTOR DYNAMICS</td>
+                                                        <td>Mihir Sarangi</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>C4</td>
+                                   <td>NC331</td>
+                                   
+                                                    <tr><td>ME60408</td>
+                                                        <td>MECHANICS OF COMPOSITES</td>
+                                                        <td>Atul Jain</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>D4</td>
+                                   <td>NC331</td>
+                                   
+                                                    <tr><td>ME60414</td>
+                                                        <td>MODERN CONTROL THEORY</td>
+                                                        <td>Ranjan Bhattacharyya</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>S3, A3</td>
+                                   <td>ME304</td>
+                                   
+                                                    <tr><td>ME60416</td>
+                                                        <td>MECHANISMS AND ROBOT KINEMATICS</td>
+                                                        <td>Cheruvu Siva Kumar</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>E4</td>
+                                   <td>NC234</td>
+                                   
+                                                    <tr><td>ME60422</td>
+                                                        <td>ACOUSTICS AND NOISE CONTROL</td>
+                                                        <td>Amiya Ranjan Mohanty</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>E4</td>
+                                   <td>ME303</td>
+                                   
+                                                    <tr><td>ME60424</td>
+                                                        <td>NON-LINEAR VIBRATIONS</td>
+                                                        <td>Kumar Ray</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>U4</td>
+                                   <td>ME303</td>
+                                   
+                                                    <tr><td>ME60430</td>
+                                                        <td>MECHANICS OF HUMAN BODY</td>
+                                                        <td>Sanjay Gupta</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>F4</td>
+                                   <td>NC234</td>
+                                   
+                                                    <tr><td>ME60432</td>
+                                                        <td>MICRO MECHANICS AND NANOMECHANICS</td>
+                                                        <td>Manas Chandra Ray</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>F4</td>
+                                   <td>NC331</td>
+                                   
+                                                    <tr><td>ME60434</td>
+                                                        <td>FRACTURE MECHANICS</td>
+                                                        <td>Goutam Chakraborty</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>F4</td>
+                                   <td>ME303</td>
+                                   
+                                                    <tr><td>ME61004</td>
+                                                        <td>CONVECTIVE HEAT AND MASS TRANSFER</td>
+                                                        <td>Sandipan Ghosh Moulic</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>C4</td>
+                                   <td>NC234</td>
+                                   
+                                                    <tr><td>ME61006</td>
+                                                        <td>RAIL VEHICLE DYNAMICS</td>
+                                                        <td>Kingshook Bhattacharyya,Anirvan Dasgupta</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                    <td>--</td>
+                                    
+                                                    <tr><td>ME67102</td>
+                                                        <td>THESIS PART-II</td>
+                                                        <td>Partha Saha</td>
+                                                        <td>0-0-0</td>
+                                                        <td>20</td>
+                                                        
+                                    <td>--</td>
+                                    
+                                                    <tr><td>ME67202</td>
+                                                        <td>THESIS PART-II</td>
+                                                        <td>Sati Nath Bhattacharyya</td>
+                                                        <td>0-0-0</td>
+                                                        <td>20</td>
+                                                        
+                                    <td>--</td>
+                                    
+                                                    <tr><td>ME67302</td>
+                                                        <td>THESIS PART-II</td>
+                                                        <td>Sanjay Gupta</td>
+                                                        <td>0-0-0</td>
+                                                        <td>20</td>
+                                                        
+                                    <td>--</td>
+                                    
+                                                    <tr><td>ME68101</td>
+                                                        <td>COMPREHENSIVE VIVA-VOCE</td>
+                                                        <td>Partha Saha</td>
+                                                        <td>0-0-0</td>
+                                                        <td>3</td>
+                                                        
+                                    <td>--</td>
+                                    
+                                                    <tr><td>ME68201</td>
+                                                        <td>COMPREHENSIVE VIVA-VOCE</td>
+                                                        <td>Sati Nath Bhattacharyya</td>
+                                                        <td>0-0-0</td>
+                                                        <td>3</td>
+                                                        
+                                    <td>--</td>
+                                    
+                                                    <tr><td>ME68301</td>
+                                                        <td>COMPREHENSIVE VIVA-VOCE</td>
+                                                        <td>Sanjay Gupta</td>
+                                                        <td>0-0-0</td>
+                                                        <td>3</td>
+                                                        
+                                    <td>--</td>
+                                    
+                                                    <tr><td>ME69006</td>
+                                                        <td>CFD LAB</td>
+                                                        <td>Sukanta Kumar Dash</td>
+                                                        <td>0-0-3</td>
+                                                        <td>2</td>
+                                                        
+                                   <td>N</td>
+                                   <td>0</td>
+                                   
+                                                    <tr><td>ME69008</td>
+                                                        <td>DESIGN PROJECT</td>
+                                                        <td>Manab Kumar Das,Chirag Deepak Kalelkar,Sati Nath Bhattacharyya</td>
+                                                        <td>0-0-3</td>
+                                                        <td>2</td>
+                                                        
+                                   <td>X</td>
+                                   <td>0</td>
+                                   
+                                                    <tr><td>ME69016</td>
+                                                        <td>MICROPROCESSOR APPLICATIONS LAB.</td>
+                                                        <td>Cheruvu Siva Kumar,Mihir Sarangi</td>
+                                                        <td>0-0-3</td>
+                                                        <td>2</td>
+                                                        
+                                   <td>P</td>
+                                   <td>0</td>
+                                   
+                                                    <tr><td>ME69036</td>
+                                                        <td>MECHATRONICS LABORATORY</td>
+                                                        <td>Cheruvu Siva Kumar,Mihir Sarangi</td>
+                                                        <td>0-0-3</td>
+                                                        <td>2</td>
+                                                        
+                                   <td>P</td>
+                                   <td>0</td>
+                                   
+                                                    <tr><td>ME69102</td>
+                                                        <td>ADVANCED MANUFACTURING LABORATORY-II</td>
+                                                        <td>Dilip Kumar Pratihar,Sushanta Kumar Panda,Jinu Paul,Cheruvu Siva Kumar,Asimava Roy Choudhury</td>
+                                                        <td>0-0-3</td>
+                                                        <td>2</td>
+                                                        
+                                   <td>X</td>
+                                   <td>0</td>
+                                   
+                                                    <tr><td>ME69106</td>
+                                                        <td>SEMINAR-II</td>
+                                                        <td>Vikranth Racherla,Ashish Kumar Nath</td>
+                                                        <td>0-0-3</td>
+                                                        <td>2</td>
+                                                        
+                                   <td>N</td>
+                                   <td>NC234,NC234</td>
+                                   
+                                                    <tr><td>ME69206</td>
+                                                        <td>SEMINAR-II</td>
+                                                        <td>Abhijit Guha,Aditya Bandopadhyay</td>
+                                                        <td>0-0-3</td>
+                                                        <td>2</td>
+                                                        
+                                   <td>P</td>
+                                   <td>0</td>
+                                   
+                                                    <tr><td>ME69306</td>
+                                                        <td>SEMINAR-II</td>
+                                                        <td>Manas Chandra Ray,Sanjay Gupta</td>
+                                                        <td>0-0-3</td>
+                                                        <td>2</td>
+                                                        
+                                   <td>X4, N</td>
+                                   <td>0</td>
+                                   
+                                                    <tr><td>MF30003</td>
+                                                        <td>ROBOTS AND COMPUTER CONTROLLED MACHINES</td>
+                                                        <td>Dilip Kumar Pratihar,Asimava Roy Choudhury</td>
+                                                        <td>3-1-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>D4</td>
+                                   <td>NC241</td>
+                                   
+                                                    <tr><td>MF30602</td>
+                                                        <td>ROBOTS & COMPUTER CONTROLLED MACHINES</td>
+                                                        <td>Dilip Kumar Pratihar,Asimava Roy Choudhury</td>
+                                                        <td>4-0-0</td>
+                                                        <td>4</td>
+                                                        
+                                   <td>D4</td>
+                                   <td>NC241,NC241</td>
+                                   
+                                                    <tr><td>MF30604</td>
+                                                        <td>NON-TRADITIONAL MANUFACTURING PROCESSES</td>
+                                                        <td>Ashish Kumar Nath,Partha Saha</td>
+                                                        <td>3-0-0</td>
+                                                        <td>3</td>
+                                                        
+                                   <td>A3</td>
+                                   <td>NC241,NC241</td>
+                                   
+                                                    <tr><td>MF40604</td>
+                                                        <td>LASER APPLICATIONS IN MANUFACTURING</td>
+                                                        <td>Ashish Kumar Nath</td>
+                                                        <td>3-0-0</td>
+                                                        <td>3</td>
+                                                        
+                                   <td>G3</td>
+                                   <td>NC441</td>
+                                   
+                                                    <tr><td>MF47601</td>
+                                                        <td>PROJECT-I</td>
+                                                        <td>Manas Chandra Ray,Anandaroop Bhattacharya,Sankha Deb,Atul Jain</td>
+                                                        <td>0-0-6</td>
+                                                        <td>4</td>
+                                                        
+                                    <td>--</td>
+                                    
+                                                    <tr><td>MF47602</td>
+                                                        <td>PROJECT-II</td>
+                                                        <td>Anandaroop Bhattacharya,Manas Chandra Ray,Sankha Deb,Atul Jain</td>
+                                                        <td>0-0-9</td>
+                                                        <td>6</td>
+                                                        
+                                    <td>--</td>
+                                    
+                                                    <tr><td>MF69002</td>
+                                                        <td>MICROPROCESSOR APPLICATION LAB.</td>
+                                                        <td>Cheruvu Siva Kumar,Mihir Sarangi</td>
+                                                        <td>0-0-3</td>
+                                                        <td>2</td>
+                                                        
+                                   <td>P</td>
+                                   <td>0</td>
+                                    </tr></table>
+
+
+                                            </td>
+                                        </tr>
+                                    </table></div>
+                        </td></tr></table></form></TD></TR></TABLE>
+    </body>
+</html>
+
