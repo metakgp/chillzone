@@ -2,6 +2,22 @@
 
 > Will find you a chillzone inside IIT KGP at any time
 
+## Organization of the code
+
+This repository serves as the data scraper. It will scrape data from the ERP
+using the given credentials. After that, you must copy the following files into
+`chill/src/`
+
+1. `schedule.json`
+1. `empty_schedule.json`
+1. `subjectDetails.json`
+
+The submodule "chill" is the frontend that will use these JSON files to generate
+the static webpage. It is hosted on
+[GitHub](https://github.com/icyflame/chillzone-frontend).
+
+## Details
+
 ### Request
 
 ```sh
