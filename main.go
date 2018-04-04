@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"strings"
 	// "fmt"
 )
 
@@ -140,22 +141,27 @@ func main() {
 		}
 	}
 
-	allSubjects = add_subject(
-		"MA",
-		"MA10002",
-		"Maths II",
-		"--",
-		"3-1-0",
-		"4",
-		"B3",
-		"NR122",
-		allSubjects,
-	)
+	b, err := ioutil.ReadFile("first-year.csv.4")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	first_year_subs := strings.Split(string(b), "\n")
+	for _, sub := range first_year_subs {
+		comps := strings.Split(sub, ",")
+		dep := string(comps[0])
+		sub_details := comps[1:]
+		if len(dep) != 2 {
+			continue
+		}
+
+		allSubjects[dep] = append(allSubjects[dep], sub_details)
+	}
 
 	transformedMap := change_map_structure(allSubjects)
 	log.Print(transformedMap)
 
-	b, err := json.Marshal(transformedMap)
+	b, err = json.Marshal(transformedMap)
 	if err != nil {
 		log.Fatal("Could not marshal subjectDetails to JSON: ", err)
 	}
@@ -206,6 +212,10 @@ func main() {
 		Combined{"V4", 2, 7, "EV20001"},
 		Combined{"V4", 2, 8, "EV20001"},
 		Combined{"NC241", 4, 8, ""},
+		Combined{"NR122", 3, 1, ""},
+		Combined{"NR222", 3, 1, ""},
+		Combined{"NR121", 3, 1, ""},
+		Combined{"NR221", 3, 1, ""},
 	}
 
 	for _, p := range problems {
