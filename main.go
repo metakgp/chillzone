@@ -9,6 +9,28 @@ import (
 	// "fmt"
 )
 
+func add_subject(
+	dep, code, name, profs, ltp, creds, slot, room string,
+	subs map[string][][]string,
+) map[string][][]string {
+	if len(dep) != 2 {
+		return subs
+	}
+
+	this_sub_props := []string{}
+	this_sub_props = append(this_sub_props, code)
+	this_sub_props = append(this_sub_props, name)
+	this_sub_props = append(this_sub_props, profs)
+	this_sub_props = append(this_sub_props, ltp)
+	this_sub_props = append(this_sub_props, creds)
+	this_sub_props = append(this_sub_props, slot)
+	this_sub_props = append(this_sub_props, room)
+
+	subs[dep] = append(subs[dep], this_sub_props)
+
+	return subs
+}
+
 type ParsedResult struct {
 	Subjects   [][]string
 	Department string
@@ -118,11 +140,32 @@ func main() {
 		}
 	}
 
+	allSubjects = add_subject(
+		"MA",
+		"MA10002",
+		"Maths II",
+		"--",
+		"3-1-0",
+		"4",
+		"B3",
+		"NR122",
+		allSubjects,
+	)
+
 	transformedMap := change_map_structure(allSubjects)
 	log.Print(transformedMap)
 
+	b, err := json.Marshal(transformedMap)
+	if err != nil {
+		log.Fatal("Could not marshal subjectDetails to JSON: ", err)
+	}
+	err = ioutil.WriteFile("temp_transformed_map.json", b, 0644)
+	if err != nil {
+		log.Fatal("Could not write to subjectDetails.json: ", err)
+	}
+
 	subjectDetails := build_subject_details(transformedMap)
-	b, err := json.Marshal(subjectDetails)
+	b, err = json.Marshal(subjectDetails)
 	if err != nil {
 		log.Fatal("Could not marshal subjectDetails to JSON: ", err)
 	}
