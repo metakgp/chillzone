@@ -132,6 +132,132 @@ func main() {
 	}
 
 	schedule := build_room_schedule(transformedMap)
+
+	type Combined struct {
+		Room  string
+		Day   int
+		Slot  int
+		Value string
+	}
+
+	// Add the problems that were reported by users and incorporate them in the
+	// schedule
+
+	problems := []Combined{
+		Combined{
+			"NC233",
+			0,
+			8,
+			"",
+		},
+		Combined{
+			"NC233",
+			3,
+			8,
+			"",
+		},
+		Combined{
+			"V1",
+			2,
+			5,
+			"BS20001",
+		},
+		Combined{
+			"V1",
+			2,
+			6,
+			"BS20001",
+		},
+		Combined{
+			"V2",
+			2,
+			5,
+			"BS20001",
+		},
+		Combined{
+			"V2",
+			2,
+			6,
+			"BS20001",
+		},
+		Combined{
+			"V3",
+			2,
+			5,
+			"BS20001",
+		},
+		Combined{
+			"V3",
+			2,
+			6,
+			"BS20001",
+		},
+		Combined{
+			"V4",
+			2,
+			5,
+			"BS20001",
+		},
+		Combined{
+			"V4",
+			2,
+			6,
+			"BS20001",
+		},
+		Combined{
+			"V1",
+			2,
+			7,
+			"EV20001",
+		},
+		Combined{
+			"V1",
+			2,
+			8,
+			"EV20001",
+		},
+		Combined{
+			"V2",
+			2,
+			7,
+			"EV20001",
+		},
+		Combined{
+			"V2",
+			2,
+			8,
+			"EV20001",
+		},
+		Combined{
+			"V3",
+			2,
+			7,
+			"EV20001",
+		},
+		Combined{
+			"V3",
+			2,
+			8,
+			"EV20001",
+		},
+		Combined{
+			"V4",
+			2,
+			7,
+			"EV20001",
+		},
+		Combined{
+			"V4",
+			2,
+			8,
+			"EV20001",
+		},
+	}
+
+	for _, p := range problems {
+		schedule[p.Room][p.Day][p.Slot] = p.Value
+	}
+
 	b, err = json.Marshal(schedule)
 	if err != nil {
 		log.Fatal("Could not marshal schedule to JSON: ", err)
