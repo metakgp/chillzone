@@ -162,6 +162,7 @@ func main() {
 		Combined{"V3", 2, 8, "EV20001"},
 		Combined{"V4", 2, 7, "EV20001"},
 		Combined{"V4", 2, 8, "EV20001"},
+		Combined{"NC241", 5, 8, ""},
 	}
 
 	for _, p := range problems {
