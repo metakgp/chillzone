@@ -162,10 +162,19 @@ func main() {
 		Combined{"V3", 2, 8, "EV20001"},
 		Combined{"V4", 2, 7, "EV20001"},
 		Combined{"V4", 2, 8, "EV20001"},
-		Combined{"NC241", 5, 8, ""},
+		Combined{"NC241", 4, 8, ""},
 	}
 
 	for _, p := range problems {
+		_, ok := schedule[p.Room]
+		if !ok {
+			continue
+		}
+
+		if !(p.Day >= 0 && p.Day < 5) || !(p.Slot >= 0 && p.Slot < 9) {
+			continue
+		}
+
 		schedule[p.Room][p.Day][p.Slot] = p.Value
 	}
 
