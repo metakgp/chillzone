@@ -2,11 +2,13 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/joho/godotenv"
 	"io/ioutil"
 	"log"
 	"os"
 	"strings"
+
+	"github.com/joho/godotenv"
+	"github.com/metakgp/chillzone/chillz"
 	// "fmt"
 )
 
@@ -37,10 +39,30 @@ type ParsedResult struct {
 	Department string
 }
 
+type Departments struct {
+	Departments []Department `json:"departments"`
+}
+
+type Department struct {
+	Code string `json:"code"`
+}
+
+func GetDepartments(filename string) ([]Department, error) {
+	data, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return nil, err
+	}
+
+	var departments Departments
+	err = json.Unmarshal(data, &departments)
+	if err != nil {
+		return nil, err
+	}
+	return departments.Departments, nil
+}
+
 func main() {
-
 	err := godotenv.Load()
-
 	if err != nil {
 		log.Print("Couldn't load env variables from .env")
 	}
@@ -93,6 +115,11 @@ func main() {
 		"WM",
 	}
 
+	// departments, err := GetDepartments("departments.json")
+	// if err != nil {
+	// 	log.Println("Unable to load departments:", err)
+	// }
+
 	allSubjects := make(map[string][][]string)
 
 	_, err = os.Stat("all_subjects.json")
@@ -105,7 +132,7 @@ func main() {
 		for _, v := range departments {
 			dep := v
 			go func() {
-				t := parse_html(dep_timetable(dep))
+				t := chillz.ParseHtml(chillz.DepTimetable(dep))
 				log.Printf("Found %d subjects in department %s", len(t), dep)
 				accumulate_channel <- ParsedResult{t, dep}
 			}()
@@ -158,7 +185,7 @@ func main() {
 		allSubjects[dep] = append(allSubjects[dep], sub_details)
 	}
 
-	transformedMap := change_map_structure(allSubjects)
+	transformedMap := chillz.ChangeMapStructure(allSubjects)
 	log.Print(transformedMap)
 
 	b, err = json.Marshal(transformedMap)
@@ -170,7 +197,7 @@ func main() {
 		log.Fatal("Could not write to subjectDetails.json: ", err)
 	}
 
-	subjectDetails := build_subject_details(transformedMap)
+	subjectDetails := chillz.BuildSubjectDetails(transformedMap)
 	b, err = json.Marshal(subjectDetails)
 	if err != nil {
 		log.Fatal("Could not marshal subjectDetails to JSON: ", err)
@@ -180,7 +207,7 @@ func main() {
 		log.Fatal("Could not write to subjectDetails.json: ", err)
 	}
 
-	schedule := build_room_schedule(transformedMap)
+	schedule := chillz.BuildRoomSchedule(transformedMap)
 
 	type Combined struct {
 		Room  string
@@ -240,7 +267,7 @@ func main() {
 		log.Fatal("Could not write to schedule.json: ", err)
 	}
 
-	empty_schedule := build_empty_schedule(schedule)
+	empty_schedule := chillz.BuildEmptySchedule(schedule)
 	b, err = json.Marshal(empty_schedule)
 	if err != nil {
 		log.Fatal("Couldn't convert empty schedule to JSON: ", err)

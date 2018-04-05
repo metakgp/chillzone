@@ -1,13 +1,12 @@
-package main
+package chillz
 
 import (
 	"log"
 	"sort"
 )
 
-func build_empty_schedule(rooms map[string][][]string) [][][]string {
+func BuildEmptySchedule(rooms map[string][][]string) [][][]string {
 	empty_sched := [][][]string{}
-
 	for i := 0; i < 5; i++ {
 		empty_sched = append(empty_sched, [][]string{})
 		for j := 0; j < 9; j++ {

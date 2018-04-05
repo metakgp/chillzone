@@ -1,4 +1,4 @@
-package main
+package chillz
 
 import "net/http"
 import "net/url"
@@ -6,9 +6,9 @@ import "io/ioutil"
 import "log"
 import "os"
 
-func dep_timetable(dep string) string {
+func DepTimetable(dep string) string {
 
-    log.Print("Starting request for department ", dep)
+	log.Print("Starting request for department ", dep)
 
 	u, _ := url.Parse("https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp")
 
@@ -34,11 +34,11 @@ func dep_timetable(dep string) string {
 
 	resp, err := client.Do(req)
 
-    if err != nil {
-        log.Fatal(err)
-    }
+	if err != nil {
+		log.Fatal(err)
+	}
 
-    log.Print("Request completed. Returning response now")
+	log.Print("Request completed. Returning response now")
 
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)

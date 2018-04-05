@@ -1,9 +1,10 @@
-package main
+package chillz
 
 import (
-	"golang.org/x/net/html"
 	"log"
 	"strings"
+
+	"golang.org/x/net/html"
 )
 
 // return the first tag in subtree for which reqd returns true (DFS)
@@ -73,8 +74,8 @@ func element_node_children(t *html.Node) []*html.Node {
  *     1. Slot
  *     1. Venue
  */
-func parse_html(input string) [][]string {
-    log.Print("Parsing HTML string now")
+func ParseHtml(input string) [][]string {
+	log.Print("Parsing HTML string now")
 	doc, err := html.Parse(strings.NewReader(input))
 	if err != nil {
 		log.Fatal(err)
@@ -84,18 +85,18 @@ func parse_html(input string) [][]string {
 
 	rTag := findReqd(doc, tableTag)
 
-    if rTag == nil || rTag.LastChild == nil {
-        return ret
-    }
+	if rTag == nil || rTag.LastChild == nil {
+		return ret
+	}
 
 	tbody := rTag.LastChild
 	rows := element_node_children(tbody)
 
-    log.Print("Found total ", len(rows), " rows. Proceeding!")
+	log.Print("Found total ", len(rows), " rows. Proceeding!")
 
-    if len(rows) == 0 {
-        return ret
-    }
+	if len(rows) == 0 {
+		return ret
+	}
 
 	for _, c := range rows {
 		kids := element_node_children(c)
@@ -104,12 +105,12 @@ func parse_html(input string) [][]string {
 		if len(kids) == 7 && kids[0].Data != "th" {
 			kid_info := []string{}
 			for _, tag := range kids {
-                tagData := ""
+				tagData := ""
 
-                // possible for <td></td>
-                if tag.FirstChild != nil {
-                    tagData = tag.FirstChild.Data
-                }
+				// possible for <td></td>
+				if tag.FirstChild != nil {
+					tagData = tag.FirstChild.Data
+				}
 
 				kid_info = append(kid_info, tagData)
 			}
@@ -117,7 +118,7 @@ func parse_html(input string) [][]string {
 		}
 	}
 
-    log.Print("Parsing completed! Returning the list of lists!")
+	log.Print("Parsing completed! Returning the list of lists!")
 
 	return ret
 }
