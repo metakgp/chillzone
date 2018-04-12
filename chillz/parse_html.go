@@ -1,6 +1,7 @@
 package chillz
 
 import (
+	"fmt"
 	"log"
 	"strings"
 
@@ -74,51 +75,56 @@ func element_node_children(t *html.Node) []*html.Node {
  *     1. Slot
  *     1. Venue
  */
-func ParseHtml(input string) [][]string {
+func ParseHtml(dep Department, input string) (Subjects, error) {
 	log.Print("Parsing HTML string now")
 	doc, err := html.Parse(strings.NewReader(input))
 	if err != nil {
-		log.Fatal(err)
+		return Subjects{}, err
 	}
 
-	ret := [][]string{}
-
 	rTag := findReqd(doc, tableTag)
-
 	if rTag == nil || rTag.LastChild == nil {
-		return ret
+		return Subjects{}, fmt.Errorf("Unable to Parse HTML")
 	}
 
 	tbody := rTag.LastChild
 	rows := element_node_children(tbody)
-
 	log.Print("Found total ", len(rows), " rows. Proceeding!")
-
 	if len(rows) == 0 {
-		return ret
+		return Subjects{}, nil
 	}
 
+	var subjects Subjects
 	for _, c := range rows {
 		kids := element_node_children(c)
-
 		// TODO: make this a constant
 		if len(kids) == 7 && kids[0].Data != "th" {
 			kid_info := []string{}
 			for _, tag := range kids {
 				tagData := ""
-
 				// possible for <td></td>
 				if tag.FirstChild != nil {
 					tagData = tag.FirstChild.Data
 				}
-
 				kid_info = append(kid_info, tagData)
 			}
-			ret = append(ret, kid_info)
+			newSubject := Subject{
+				Dep:     dep,
+				Code:    kid_info[0],
+				Name:    kid_info[1],
+				LTP:     kid_info[3],
+				Credits: kid_info[4],
+				Slot:    kid_info[5],
+				Room:    kid_info[6],
+			}
+
+			for _, prof := range strings.Split(kid_info[2], ",") {
+				newProf := Professor{Name: prof}
+				newSubject.Professors = append(newSubject.Professors, newProf)
+			}
+			subjects = append(subjects, newSubject)
 		}
 	}
-
 	log.Print("Parsing completed! Returning the list of lists!")
-
-	return ret
+	return subjects, nil
 }

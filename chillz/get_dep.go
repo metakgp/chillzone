@@ -6,42 +6,41 @@ import "io/ioutil"
 import "log"
 import "os"
 
-func DepTimetable(dep string) string {
-
-	log.Print("Starting request for department ", dep)
-
-	u, _ := url.Parse("https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp")
-
+func FetchDepTimetable(dep Department) (string, error) {
+	log.Print("Starting request for department ", dep.Code)
+	u, err := url.Parse("https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp")
+	if err != nil {
+		return "", err
+	}
 	q := u.Query()
 	q.Set("action", "second")
-	q.Set("dept", dep)
-
+	q.Set("dept", dep.Code)
 	u.RawQuery = q.Encode()
 
-	req, _ := http.NewRequest("POST", u.String(), nil)
+	req, err := http.NewRequest("POST", u.String(), nil)
+	if err != nil {
+		return "", err
+	}
+
+	req.Header.Set("User-Agent", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:58.0) Gecko/20100101 Firefox/58.0")
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	req.Header.Set("Cookie", "JSESSIONID="+os.Getenv("JSESSIONID"))
 
 	req.ParseForm()
-
 	req.PostForm.Set("for_session", "2017-2018")
 	req.PostForm.Set("for_semester", "SPRING")
 
-	req.Header.Add("User-Agent", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:58.0) Gecko/20100101 Firefox/58.0")
-	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
-
-	req.Header.Add("Cookie", "JSESSIONID="+os.Getenv("JSESSIONID"))
-
 	client := &http.Client{}
-
 	resp, err := client.Do(req)
-
 	if err != nil {
-		log.Fatal(err)
+		return "", err
 	}
-
-	log.Print("Request completed. Returning response now")
+	log.Printf("Request completed. Returning response now\n")
 
 	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
-
-	return string(body)
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return "", err
+	}
+	return string(body), nil
 }
