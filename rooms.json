@@ -1,0 +1,195 @@
+[
+    {
+        "room": "NR121", 
+        "location": "Nalanda"
+    },
+    {
+        "room": "NR122",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NR123",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NR124",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NR221",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NR222",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NR223",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NR224",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NR321",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NR322",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NR323",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NR324",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NR421",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NR422",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NR423",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NR424",
+        "location": "Nalanda"
+    },
+ 
+       {
+        "room": "NC141",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC142",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC131",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC132",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC241",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC242",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC243",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC244",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC231",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC232",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC233",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC234",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC341",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC342",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC343",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC344",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC331",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC332",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC333",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC334",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC441",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC442",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC443",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC444",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC431",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC432",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC433",
+        "location": "Nalanda"
+    },
+    {
+        "room": "NC434",
+        "location": "Nalanda"
+    },
+    {
+        "room": "V1",
+        "location": "Vikramshila"
+    },
+    {
+        "room": "V2",
+        "location": "Vikramshila"
+    },
+    {
+        "room": "V3",
+        "location": "Vikramshila"
+    },
+    {
+        "room": "V4",
+        "location": "Vikramshila"
+    }
+]
