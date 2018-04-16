@@ -1,4 +1,4 @@
-package main
+package chillz
 
 var keys = []string{
 	"Code",
@@ -10,7 +10,7 @@ var keys = []string{
 	"Room",
 }
 
-func change_map_structure(subs map[string][][]string) map[string][]map[string]string {
+func ChangeMapStructure(subs map[string][][]string) map[string][]map[string]string {
 	ret := make(map[string][]map[string]string)
 
 	for k, v := range subs {
