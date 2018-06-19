@@ -10,7 +10,7 @@ func dep_timetable(dep string) string {
 
     log.Print("Starting request for department ", dep)
 
-	u, _ := url.Parse("https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp")
+	u, _ := url.Parse("https://erp.iitkgp.ac.in/Acad/timetable_track.jsp")
 
 	q := u.Query()
 	q.Set("action", "second")
