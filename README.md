@@ -37,3 +37,15 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
 1. After the time table is loaded, check the Network tab for the `POST
    timetable_track.js ...` request. Select this request; switch to the Cookies
    tab and copy the `JSESSIONID` cookie value to your `.env` file
+
+### Updation for a new semester
+
+1. Get a valid `JSESSIONID`. Put this in the `.env` file (using `.env.template`
+   as the base for this file)
+1. Delete/Rename the `all_subjects.json` file if present
+1. Delete the `first-year.csv` file. You need to populate this file manually
+   using `first-year.csv.template` as a reference
+1. Empty the `problems` array inside `main.go` (**TODO:** This should also be read
+   from a file)
+1. Run `go build && ./chillzone`. This will build and run the `main` function
+   inside `main.go`

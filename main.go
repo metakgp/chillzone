@@ -141,21 +141,23 @@ func main() {
 		}
 	}
 
-	b, err := ioutil.ReadFile("first-year.csv.4")
-	if err != nil {
-		log.Fatal(err)
-	}
+	b, err := ioutil.ReadFile("first-year.csv")
+	first_years_exist := err == nil
+	if first_years_exist {
 
-	first_year_subs := strings.Split(string(b), "\n")
-	for _, sub := range first_year_subs {
-		comps := strings.Split(sub, ",")
-		dep := string(comps[0])
-		sub_details := comps[1:]
-		if len(dep) != 2 {
-			continue
+		first_year_subs := strings.Split(string(b), "\n")
+		for _, sub := range first_year_subs {
+			comps := strings.Split(sub, ",")
+			dep := string(comps[0])
+			sub_details := comps[1:]
+			if len(dep) != 2 {
+				continue
+			}
+
+			allSubjects[dep] = append(allSubjects[dep], sub_details)
 		}
-
-		allSubjects[dep] = append(allSubjects[dep], sub_details)
+	} else {
+		log.Printf("WARNING: First year timetable not taken into consideration")
 	}
 
 	transformedMap := change_map_structure(allSubjects)
@@ -193,29 +195,10 @@ func main() {
 	// schedule
 
 	problems := []Combined{
-		Combined{"NC233", 0, 8, ""},
-		Combined{"NC233", 3, 8, ""},
-		Combined{"V1", 2, 5, "BS20001"},
-		Combined{"V1", 2, 6, "BS20001"},
-		Combined{"V2", 2, 5, "BS20001"},
-		Combined{"V2", 2, 6, "BS20001"},
-		Combined{"V3", 2, 5, "BS20001"},
-		Combined{"V3", 2, 6, "BS20001"},
-		Combined{"V4", 2, 5, "BS20001"},
-		Combined{"V4", 2, 6, "BS20001"},
-		Combined{"V1", 2, 7, "EV20001"},
-		Combined{"V1", 2, 8, "EV20001"},
-		Combined{"V2", 2, 7, "EV20001"},
-		Combined{"V2", 2, 8, "EV20001"},
-		Combined{"V3", 2, 7, "EV20001"},
-		Combined{"V3", 2, 8, "EV20001"},
-		Combined{"V4", 2, 7, "EV20001"},
-		Combined{"V4", 2, 8, "EV20001"},
-		Combined{"NC241", 4, 8, ""},
-		Combined{"NR122", 3, 1, ""},
-		Combined{"NR222", 3, 1, ""},
-		Combined{"NR121", 3, 1, ""},
-		Combined{"NR221", 3, 1, ""},
+	// Combined{"NC233", 0, 8, ""},
+	// Combined{"V1", 2, 5, "BS20001"},
+	// Combined{"V1", 2, 6, "BS20001"},
+	// Combined{"V2", 2, 5, "BS20001"},
 	}
 
 	for _, p := range problems {
