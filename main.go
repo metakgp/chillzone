@@ -2,12 +2,12 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/joho/godotenv"
 	"io/ioutil"
 	"log"
 	"os"
 	"strings"
-	// "fmt"
 )
 
 func add_subject(
@@ -45,52 +45,57 @@ func main() {
 		log.Print("Couldn't load env variables from .env")
 	}
 
+	// departments := []string{
+	// "AE",
+	// "AG",
+	// "AR",
+	// "AT",
+	// "BE",
+	// "BM",
+	// "BS",
+	// "BT",
+	// "CD",
+	// "CE",
+	// "CH",
+	// "CL",
+	// "CR",
+	// "CS",
+	// "CY",
+	// "DE",
+	// "EC",
+	// "EE",
+	// "EF",
+	// "ES",
+	// "ET",
+	// "GG",
+	// "GS",
+	// "HS",
+	// "ID",
+	// "IM",
+	// "IP",
+	// "IT",
+	// "MA",
+	// "ME",
+	// "MI",
+	// "MM",
+	// "MS",
+	// "MT",
+	// "NA",
+	// "NT",
+	// "PH",
+	// "RD",
+	// "RE",
+	// "RJ",
+	// "RT",
+	// "RX",
+	// "SL",
+	// "TS",
+	// "WM",
+	// }
+
 	departments := []string{
-		"AE",
 		"AG",
-		"AR",
-		"AT",
-		"BE",
-		"BM",
-		"BS",
-		"BT",
-		"CD",
-		"CE",
-		"CH",
-		"CL",
-		"CR",
-		"CS",
-		"CY",
-		"DE",
-		"EC",
-		"EE",
-		"EF",
-		"ES",
-		"ET",
-		"GG",
-		"GS",
-		"HS",
-		"ID",
-		"IM",
-		"IP",
-		"IT",
-		"MA",
-		"ME",
-		"MI",
-		"MM",
-		"MS",
-		"MT",
-		"NA",
-		"NT",
-		"PH",
-		"RD",
-		"RE",
-		"RJ",
-		"RT",
-		"RX",
-		"SL",
-		"TS",
-		"WM",
+		"AE",
 	}
 
 	allSubjects := make(map[string][][]string)
@@ -105,9 +110,14 @@ func main() {
 		for _, v := range departments {
 			dep := v
 			go func() {
-				t := parse_html(dep_timetable(dep))
+				dep_html := dep_timetable(dep)
+				t := parse_html(dep_html)
 				log.Printf("Found %d subjects in department %s", len(t), dep)
 				accumulate_channel <- ParsedResult{t, dep}
+				if len(t) == 0 {
+					log.Print(dep_html)
+					log.Fatal(fmt.Errorf("0 SUBJECTS FOUND"))
+				}
 			}()
 		}
 
