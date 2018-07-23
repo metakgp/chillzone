@@ -114,10 +114,11 @@ func main() {
 				t := parse_html(dep_html)
 				log.Printf("Found %d subjects in department %s", len(t), dep)
 				accumulate_channel <- ParsedResult{t, dep}
-				if len(t) == 0 {
-					log.Print(dep_html)
-					log.Fatal(fmt.Errorf("0 SUBJECTS FOUND"))
+
+				if len(t) == 0 && InDebugMode() {
+					log.Fatal(fmt.Errorf("0 SUBJECTS FOUND.\nHTML OUTPUT: %s", dep_html))
 				}
+
 			}()
 		}
 

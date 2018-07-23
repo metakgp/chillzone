@@ -1,10 +1,12 @@
 package main
 
 import "net/http"
+import "net/http/httputil"
 import "net/url"
 import "io/ioutil"
 import "log"
 import "os"
+import "fmt"
 
 func dep_timetable(dep string) string {
 
@@ -26,12 +28,20 @@ func dep_timetable(dep string) string {
 	req.PostForm.Set("for_semester", os.Getenv("SEMESTER"))
 	req.PostForm.Set("dept", dep)
 
-	req.Header.Add("User-Agent", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:58.0) Gecko/20100101 Firefox/58.0")
+	req.Header.Add("User-Agent", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:61.0) Gecko/20100101 Firefox/61.0")
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 
 	req.Header.Add("Cookie", "JSESSIONID="+os.Getenv("JSESSIONID"))
 
 	client := &http.Client{}
+
+	if InDebugMode() {
+		requestDump, err := httputil.DumpRequest(req, true)
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println(string(requestDump))
+	}
 
 	resp, err := client.Do(req)
 
