@@ -42,10 +42,17 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
 
 1. Get a valid `JSESSIONID`. Put this in the `.env` file (using `.env.template`
    as the base for this file)
+1. Update the `SESSION` and `SEMESTER` environment variables
 1. Delete/Rename the `all_subjects.json` file if present
 1. Delete the `first-year.csv` file. You need to populate this file manually
    using `first-year.csv.template` as a reference
-1. Empty the `problems` array inside `main.go` (**TODO:** This should also be read
-   from a file)
+1. Empty the `problems` array inside `main.go`
 1. Run `go build && ./chillzone`. This will build and run the `main` function
    inside `main.go`
+
+**Note:** In case you are unable to scrape the new semester's timetable, then,
+these steps will help you find the problem:
+
+1. Turn on `DEBUG` inside the `.env` by setting it to `"1"`
+1. Reduce the size of the departments array to 2 so that you are not buried with
+   output in the terminal
