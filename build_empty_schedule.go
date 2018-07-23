@@ -28,7 +28,5 @@ func build_empty_schedule(rooms map[string][][]string) [][][]string {
 		}
 	}
 
-	log.Print(empty_sched)
-
 	return empty_sched
 }
