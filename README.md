@@ -43,7 +43,7 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
 1. Get a valid `JSESSIONID`. Put this in the `.env` file (using `.env.template`
    as the base for this file)
 1. Update the `SESSION` and `SEMESTER` environment variables
-1. Delete/Rename the `all_subjects.json` file if present
+1. Delete the `all_subjects.json` file
 1. Delete the `first-year.csv` file. You need to populate this file manually
    using `first-year.csv.template` as a reference
 1. Empty the `problems` array inside `main.go`
