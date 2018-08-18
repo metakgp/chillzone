@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"sort"
 )
 
@@ -16,8 +15,6 @@ func build_empty_schedule(rooms map[string][][]string) [][][]string {
 	}
 
 	for room, schedule := range rooms {
-		log.Println(room)
-		log.Println(schedule[0])
 		for i := 0; i < 5; i++ {
 			for j := 0; j < 9; j++ {
 				if schedule[i][j] == "" {
