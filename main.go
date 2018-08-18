@@ -172,10 +172,6 @@ func main() {
 	if err != nil {
 		log.Fatal("Could not marshal subjectDetails to JSON: ", err)
 	}
-	err = ioutil.WriteFile("temp_transformed_map.json", b, 0644)
-	if err != nil {
-		log.Fatal("Could not write to subjectDetails.json: ", err)
-	}
 
 	subjectDetails := build_subject_details(transformedMap)
 	b, err = json.Marshal(subjectDetails)
