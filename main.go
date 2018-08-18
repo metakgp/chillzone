@@ -167,15 +167,10 @@ func main() {
 	}
 
 	transformedMap := change_map_structure(allSubjects)
-	log.Print(transformedMap)
 
 	b, err = json.Marshal(transformedMap)
 	if err != nil {
 		log.Fatal("Could not marshal subjectDetails to JSON: ", err)
-	}
-	err = ioutil.WriteFile("temp_transformed_map.json", b, 0644)
-	if err != nil {
-		log.Fatal("Could not write to subjectDetails.json: ", err)
 	}
 
 	subjectDetails := build_subject_details(transformedMap)
@@ -200,13 +195,21 @@ func main() {
 	// Add the problems that were reported by users and incorporate them in the
 	// schedule
 
-	// TODO: Move this to a file
-	problems := []Combined{
-	// Combined{"NC233", 0, 8, ""},
-	// Combined{"V1", 2, 5, "BS20001"},
-	// Combined{"V1", 2, 6, "BS20001"},
-	// Combined{"V2", 2, 5, "BS20001"},
+	problems := []Combined{}
+	_, err = os.Stat("problems.json")
+	if err == nil {
+		b, err = ioutil.ReadFile("problems.json")
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		err = json.Unmarshal(b, &problems)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
+
+	log.Print("Problems: ", problems)
 
 	for _, p := range problems {
 		_, ok := schedule[p.Room]
