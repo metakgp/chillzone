@@ -2,6 +2,14 @@
 
 > Will find you a chillzone inside IIT KGP at any time
 
+## TOC
+
+- [Organization of the code](#organization-of-the-code)
+- [How does it work?](#how-does-it-work)
+- [Meanings of the various files](#meanings-of-the-various-files)
+    - [Input files](#input-files)
+    - [Output files](#output-files)
+
 ## Organization of the code
 
 This repository serves as the data scraper. It will scrape data from the ERP
@@ -16,7 +24,7 @@ The submodule "chill" is the frontend that will use these JSON files to generate
 the static webpage. It is hosted on
 [GitHub](https://github.com/icyflame/chillzone-frontend).
 
-## Details
+## How does it work?
 
 ### Request
 
@@ -56,3 +64,49 @@ these steps will help you find the problem:
 1. Turn on `DEBUG` inside the `.env` by setting it to `"1"`
 1. Reduce the size of the departments array to 2 so that you are not buried with
    output in the terminal
+
+## Meanings of the various files
+
+### Input Files
+
+- `problems.json`
+
+    JSON file that stores problems reported by users. Sometimes, the ERP might
+    show that course A is scheduled to be held in room B, but later, due to
+    (say) too many students, the course might be moved to a bigger room C. Then,
+    a few nodes can be added to the JSON file without touching other files and
+    the schedule can be regenerated.
+
+- `first-year.csv`
+
+    The first year timetable is not available by default on ERP, so we need to
+    add it manually using the central timetable PDF. This CSV file will be taken
+    into consideration when the schedule is constructed. Refer to the template
+    for details.
+
+### Output Files
+
+- `schedule.json`
+
+    This is JSON file whose keys are the names of the rooms. Each value is a
+    matrix with 5 rows and 9 columns. Each element in the matrix is the subject
+    code of the class that will be held in that room during that one-hour slot.
+    This string can be empty to show that the room will remain empty.
+
+- `empty_schedule.json`
+
+    This is a JSON file that stores a matrix with 5 rows and 9 columns. Each
+    element of the matrix is a list of strings containing the list of rooms that
+    are free during that one hour slot.
+
+- `subjectDetails.json`
+
+    This JSON file is used to show the tooltip with the name of the course and
+    the name of the professors on top of the timetable entry in the chillzone
+    webpage. It is a JSON file where the keys are subject codes and the values are
+    strings with this structure: `<SUBJECT NAME> - <PROFESSOR NAMES>`.
+
+## Maintainer
+
+Shivam Kumar Jha
+@thealphadollar on GitHub and Metakgp Slack
