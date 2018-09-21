@@ -8,7 +8,8 @@ import (
 func build_room_schedule(subs map[string][]map[string]string) map[string][][]string {
 
 	sched := make(map[string][][]string)
-	for _, k := range rooms {
+	for _, room_obj := range rooms {
+		k := room_obj.Number
 		sched[k] = [][]string{}
 
 		for i := 0; i < 5; i++ {
