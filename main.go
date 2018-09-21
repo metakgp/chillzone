@@ -45,53 +45,11 @@ func main() {
 		log.Print("Couldn't load env variables from .env")
 	}
 
-	departments := []string{
-		"AE",
-		"AG",
-		"AR",
-		"AT",
-		"BE",
-		"BM",
-		"BS",
-		"BT",
-		"CD",
-		"CE",
-		"CH",
-		"CL",
-		"CR",
-		"CS",
-		"CY",
-		"DE",
-		"EC",
-		"EE",
-		"EF",
-		"ES",
-		"ET",
-		"GG",
-		"GS",
-		"HS",
-		"ID",
-		"IM",
-		"IP",
-		"IT",
-		"MA",
-		"ME",
-		"MI",
-		"MM",
-		"MS",
-		"MT",
-		"NA",
-		"NT",
-		"PH",
-		"RD",
-		"RE",
-		"RJ",
-		"RT",
-		"RX",
-		"SL",
-		"TS",
-		"WM",
+	departments, err := GetDepartments("departments.json")
+	if err != nil {
+		log.Fatal("Couldn't read department data: ", err)
 	}
+	log.Print(departments)
 
 	allSubjects := make(map[string][][]string)
 
@@ -103,7 +61,7 @@ func main() {
 		accumulate_channel := make(chan ParsedResult)
 
 		for _, v := range departments {
-			dep := v
+			dep := v.Code
 			go func() {
 				dep_html := dep_timetable(dep)
 				t := parse_html(dep_html)
