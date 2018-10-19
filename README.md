@@ -108,5 +108,5 @@ these steps will help you find the problem:
 
 ## Maintainer
 
-Shivam Kumar Jha
+Shivam Kumar Jha<br/>
 @thealphadollar on GitHub and Metakgp Slack
