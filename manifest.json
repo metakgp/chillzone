@@ -1,11 +1,11 @@
 {
-    "name": "PWA Demo App", 
-    "short_name": "PWA Demo",
+    "name": "Chill Zone", 
+    "short_name": "Chill Zone",
     "start_url": "/",
     "theme_color": "#6154c8",
     "display": "standalone",
     "background_color": "#fff",
-    "description": "PWA | Demo App",
+    "description": "Chill Zone",
     "icons": [{
       "src": "./images/icons/pwa_72x72.png",
       "sizes": "48x48",
