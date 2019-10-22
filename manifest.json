@@ -1,11 +1,11 @@
 {
-    "name": "Chill Zone", 
-    "short_name": "Chill Zone",
+    "name": "Chillzone - IIT Kharagpur", 
+    "short_name": "Chillzone",
     "start_url": "/",
     "theme_color": "#6154c8",
     "display": "standalone",
     "background_color": "#fff",
-    "description": "Chill Zone",
+    "description": "Chillzone: Find a place to chill, NOW!",
     "icons": [{
       "src": "./images/icons/pwa_72x72.png",
       "sizes": "48x48",
