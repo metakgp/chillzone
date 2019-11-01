@@ -110,13 +110,13 @@ for i in range(0,len(schedule)) :
                 break
 
     
-    temp = {"slot":slot[0],"room":schedule[i]["room"],"sub":schedule[i]["sub"],"dist":schedule[i]["slots"]}
+    temp = {"slot":slot[0],"room":schedule[i]["room"],"sub":schedule[i]["sub"]}
     temp.update(subjectsinfo[schedule[i]["sub"]])
     output.append(temp)
     # print(temp)
 
 with open("first-year-new.csv","w") as csv_file : # output
-    fields = ['sub','code','course','aaa',"dis","cred","slot","room","dist"]
+    fields = ['sub','code','course','aaa',"dis","cred","slot","room"]
     csv_writer = csv.DictWriter(csv_file,fieldnames=fields)
     csv_writer.writeheader()
     csv_writer.writerows(output)
