@@ -60,6 +60,8 @@ for i in range(0,len(sectionIndexes)-1) :
 
     for line in tempLines :
         line = line.strip()
+        # print(line)
+        # print(slotList[current_slot])
         if line == emptySlot :
             current_slot=(current_slot+1)%slotSize
         elif isLab(line) != -1 :
@@ -70,10 +72,8 @@ for i in range(0,len(sectionIndexes)-1) :
             current_slot = (current_slot+1)%slotSize
         elif isRoom(line) :
             rooms.append(line)
-        #TO DEBUG pre processing
-        # print(line)
-        # print(current_slot)
-        # if i > 2 :
+        # TO DEBUG pre processing
+        # if i > 3 :
         #     x = input()
     dict = {}
     for sub in subjects :
@@ -114,10 +114,10 @@ for i in range(0,len(schedule)) :
     temp.update(subjectsinfo[schedule[i]["sub"]])
     output.append(temp)
     # print(temp)
-
 output = sorted(output,key = lambda i : i['code'])
+
 with open("first-year-new.csv","w") as csv_file : # output
-    fields = ['sub','code','course','aaa',"dis","cred","slot","room","dist"]
+    fields = ['sub','code','course','aaa',"dis","cred","slot","room"]
     csv_writer = csv.DictWriter(csv_file,fieldnames=fields)
     csv_writer.writeheader()
     csv_writer.writerows(output)
