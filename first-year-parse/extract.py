@@ -1,13 +1,12 @@
 import csv
 
 lines = []
-with open("csem.txt") as inpfile :
+with open("semData.txt") as inpfile :
     lines = inpfile.read().split('\n')
 
-subjects = ["MA","EE","HS","CY"]
-subDuration = 2
-labs = ["ELECTRICAL","CHEMISTRY","HS LAB","MANUF. PROCESSES"]
-labDuration = [3,3,2,3]
+subjects = ["MA","EE","HS","CY","ME","PH","CS"]
+labs = ["ELECTRICAL","CHEMISTRY","HS LAB","MANUF. PROCESSES","PHYSICS","DATA","DRAWING"]
+labDuration = [3,3,2,3,3,4,4]
 emptySlot = "#"
 
 slotList = ['00', '01', '02', '03', '04', '10', '11', '12', '13', '14', '20', '21', '22', '23', '24', '30', '31', '32', '33', '34', '40', '41', '42', '43', '44','05', '06', '07', '08', '15', '16', '17', '18', '25', '26', '27', '28', '35', '36', '37', '38', '45', '46', '47', '48']
@@ -84,7 +83,8 @@ for i in range(0,len(sectionIndexes)-1) :
             if subs[j] == sub :
                 dict[sub].append(slots[j])
                 room = rooms[j]
-        schedule.append({"sub":sub,"slots":dict[sub],"room":room})
+        if len(dict[sub]) > 0 :
+            schedule.append({"sub":sub,"slots":dict[sub],"room":room})
 
 subjectsinfo = {}
 with open("first-year.csv","r") as csv_file :
@@ -115,8 +115,9 @@ for i in range(0,len(schedule)) :
     output.append(temp)
     # print(temp)
 
+output = sorted(output,key = lambda i : i['code'])
 with open("first-year-new.csv","w") as csv_file : # output
-    fields = ['sub','code','course','aaa',"dis","cred","slot","room"]
+    fields = ['sub','code','course','aaa',"dis","cred","slot","room","dist"]
     csv_writer = csv.DictWriter(csv_file,fieldnames=fields)
     csv_writer.writeheader()
     csv_writer.writerows(output)

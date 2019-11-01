@@ -10,5 +10,5 @@ for i in range(0,len(lines)):
     lines[i]=lines[i].replace("\n","")
 lines = list(filter(lambda a: any(c.isalpha() for c in a),lines))
 # print("\n".join(lines))
-with open("extractedText.txt","w") as fout :
+with open("semData.txt","w") as fout :
     fout.write("\n".join(lines))
