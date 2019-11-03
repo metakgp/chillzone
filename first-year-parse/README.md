@@ -4,10 +4,10 @@
 
         * delete all text apart from first year time table data and odd section data
 
-        * add a  &quot;#&quot; character for every empty slot
+        * add a  "#" character for every empty slot
 
         * duplicate subject and room entries for double lectures in the text file
 
-3. Run python `extract.py`
+3. Run `python extract.py`
 
 To be added manually : All Tutorial and Mechanics for even sections
