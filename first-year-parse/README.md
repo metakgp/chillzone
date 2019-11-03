@@ -1,13 +1,13 @@
-1. Convert pdf to .docx and Run textExtract.py
+1. Convert pdf to .docx (use `https://pdf2doc.com`) and Run     `textExtract.py`
 
-2. In the semData file :
+2. In the `semData.txt` file :
 
- a. delete all text apart from first year time table data and odd section data
+        * delete all text apart from first year time table data and odd section data
 
- b. add a  &#39;#&#39; character for every empty slot
+        * add a  &quot;#&quot; character for every empty slot
 
- d. duplicate subject and room entries for double lectures in the text file
+        * duplicate subject and room entries for double lectures in the text file
 
-3. Run the extract script.
+3. Run python `extract.py`
 
 To be added manually : All Tutorial and Mechanics for even sections
