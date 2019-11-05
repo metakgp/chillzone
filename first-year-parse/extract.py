@@ -87,7 +87,7 @@ for i in range(0,len(sectionIndexes)-1) :
             schedule.append({"sub":sub,"slots":dict[sub],"room":room})
 
 subjectsinfo = {}
-with open("first-year.csv","r") as csv_file :
+with open("first-year-data.csv","r") as csv_file :
     csv_reader = csv.reader(csv_file, delimiter=',')
     for row in csv_reader :
         if(row[0] not in subjectsinfo) :
@@ -116,7 +116,7 @@ for i in range(0,len(schedule)) :
     # print(temp)
 output = sorted(output,key = lambda i : i['code'])
 
-with open("first-year-new.csv","w") as csv_file : # output
+with open("first-year.csv","w") as csv_file : # output
     fields = ['sub','code','course','aaa',"dis","cred","slot","room"]
     csv_writer = csv.DictWriter(csv_file,fieldnames=fields)
     csv_writer.writeheader()

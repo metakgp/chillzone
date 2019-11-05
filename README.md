@@ -53,7 +53,8 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
 1. Update the `SESSION` and `SEMESTER` environment variables
 1. Delete the `all_subjects.json` file
 1. Delete the `first-year.csv` file. You need to populate this file manually
-   using `first-year.csv.template` as a reference
+   using `first-year.csv.template` as a reference or please look into 
+   the `first-year-parse` directory to generate the new first-year timetable.
 1. Empty the `problems` array inside `main.go`
 1. Run `go build && ./chillzone`. This will build and run the `main` function
    inside `main.go`
