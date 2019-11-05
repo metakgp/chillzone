@@ -1,7 +1,6 @@
 import textract
-# import regex as re
 
-text = str(textract.process('/home/sriyash/chillZone/Aut_Time_Table_19_20.docx'))
+text = str(textract.process('Aut_Time_Table_19_20.docx'))
 text = text.replace("\\n","\n")
 text = text.replace("\\t","\n")
 lines = text.split("\n")
