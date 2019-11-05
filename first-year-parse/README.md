@@ -1,4 +1,4 @@
-1. Convert pdf to .docx (use `https://pdf2doc.com`) and Run     `textExtract.py`
+1. Convert pdf to .docx (use `https://pdf2doc.com`),copy it in the first-year parse directory and Run `textExtract.py`
 
 2. In the `semData.txt` file :
 

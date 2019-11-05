@@ -58,6 +58,8 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
 1. Run `go build && ./chillzone`. This will build and run the `main` function
    inside `main.go`
 
+1. To generate the first-year timetable look into the first-year-parse directory
+
 **Note:** In case you are unable to scrape the new semester's timetable, then,
 these steps will help you find the problem:
 
