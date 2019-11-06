@@ -12,4 +12,4 @@
 
 To be added manually : All Tutorial and Mechanics for even sections(if needed)
 
-Note : `first-year-data.csv` is to extract meta-data for all courses and the new timetable genrated in `first-year.csv`
+Note : first-year.csv is to extract meta-data for all courses and the new timetable generated is first-year-new.csv
