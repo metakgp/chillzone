@@ -1,6 +1,8 @@
 import textract
+import os
 
-text = str(textract.process('TimeTable.docx'))
+cur_dir = os.path.abspath(os.path.dirname(__file__))
+text = str(textract.process(os.path.join(cur_dir, 'TimeTable.docx')))
 text = text.replace("\\n","\n")
 text = text.replace("\\t","\n")
 lines = text.split("\n")
