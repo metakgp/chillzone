@@ -1,8 +1,8 @@
-1. Convert pdf to .docx (use `https://pdf2doc.com`),copy it in the first-year parse directory,rename it to `TimeTable.docx` and Run `textExtract.py`
+1. Convert pdf to .docx (use `https://pdf2docx.com/`),copy it in the first-year parse directory,rename it to `TimeTable.docx` and Run `textExtract.py` (install dependencies from requirements.txt before this command).
 
 2. In the `semData.txt` file :
-
-        * delete all text apart from first year time table data and odd section data
+        
+        * delete all text apart from first year time table data and odd section data (delete everything above the link "FIRST YEAR TIME TABLE FOR SECTION 1" and below line including "OVERALL STRUCTURE OF TIME \xe2\x80\x93 TABLE FOR SECOND YEAR")
 
         * add a  "#" character for every empty slot
 
