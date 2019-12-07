@@ -1,3 +1,2 @@
-textract
+textract==1.6.3
 regex
-csv
