@@ -2,7 +2,7 @@ import csv
 import excel_formatter
 import restructure
 
-filename = "wb1.xlsx"
+filename = input("Enter the excel file name: ")
 
 def get_sub(temp):
     return temp[0]
