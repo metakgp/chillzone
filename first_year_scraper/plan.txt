@@ -1,20 +1,21 @@
 
 TARGET: get first-year.csv directly
 
-1. Get Timetable Pdf            ->            STEP 3 (ABORTED...STEP 2 NOT COMPLETED)
+1. Get Timetable Pdf            ->            STEP 3 (MAY BE DONE)
     i. write scraper to login erp
     ii. ask scraper to get timetable
 
-2. Convert it into excel        ->            STEP 2 (ONGOING...SEEMS NO EASY SOLUTION)
+2. Convert it into excel        ->            STEP 2 (ONGOING...DONE BY CAMALOT LIBRARY!!)
     i. write scraper to get smallpdf.com to convert from pdf to excel -> NOT A GOOD IDEA(NO POINT IN INSTALLING BROWSER IN SERVER)
     ii. research this: https://solidframework.net/ (mind behind smallpdf.com) -> DAMNN TOO EXPENSIVE 🤯🤯🤯
     iii. handling manually is the best way to do this
+    iv. using camalot to scan the pdf to excel sheet
 
 3. Formatting Excel             ->            STEP 1 (DONE!)
-    i. Locate sheets with first year timetables :: LOCATE EAA IN SPECIFIC LOACTIONS (FIRST YEAR IS NOT WRITTEN IN ALL -> PARSING ERROR)
-    ii. sanitize sheets to remove heading so that all are equal :: GET Time/Day AT A1 FOR EASY PROCESSING OF NEXT STEP
-    iii. get a map to connect times to slot number :: MANUAL GENERATION
+    i. Locate sheets with first year timetables :: LOCATE EAA IN SPECIFIC LOACTIONS (FIRST YEAR IS NOT WRITTEN IN ALL -> PARSING ERROR) -> PARSING ALMOST ALWAYS PROPER
+    ii. sanitize sheets to remove heading so that all are equal :: GET Time/Day AT A1 FOR EASY PROCESSING OF NEXT STEP -> DELETE 2 ROWS FROM TOP AND 2 COLS FROM LEFT
+    iii. get a map to connect times to slot number :: MANUAL GENERATION -> WHILE MATCHING TRY MAX MATCH WITH ANY POSSIBLE SLOT IN THE WEEK
     iv. manipulate excel to get data with mapping slot->room :: LEARN ~PYEXCEL
-    v. find api to get subject details from subject name of first years :: TRY GETTING ACCESS TO HERCULES
+    v. find api to get subject details from subject name of first years :: TRY GETTING ACCESS TO HERCULES ->NO NEED JUST MAP IT DIRECTLY
     ---location: slots->room->subject with details---
     vi. restructure data to get first_year.csv

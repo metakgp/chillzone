@@ -1,4 +1,3 @@
 Step1: Get central timetable from erp in pdf
-Step2: Head out to https://smallpdf.com/pdf-to-excel and get the excel generated from this
-Step3: Run the script in main.py and put name of converted excel when asked for filename
-Step4: Get first_year.csv generated in the same folder
+Step2: Run the script in main.py and put name of the timetable file when asked for filename
+Step3: Get first_year.csv generated in the same folder
