@@ -3,8 +3,9 @@ import excel_parser
 import excel_formatter
 import restructure
 
-filename = input("Enter the pdf file name: ")
 target_filename = "workbook.xlsx"
+
+filename = input("Enter the pdf file name: ")
 def get_sub(temp):
     return temp[0]
 
