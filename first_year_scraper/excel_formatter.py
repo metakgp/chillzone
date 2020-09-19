@@ -55,7 +55,7 @@ def map_sheets(valid_sheets, wb):
         sub_vs_slot = {}
         ws = wb.get_sheet_by_name(sheet)
         if(ws['L2'].value is not None or ws['K2'].value is None):
-            print("parsing error in sheet {}, please inclue it in first_year.csv manually".format(sheet))
+            print("parsing error in sheet {}, please include it in first_year.csv manually".format(sheet))
             continue
 
         for i in range(0, 6):
