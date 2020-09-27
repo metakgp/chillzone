@@ -8,3 +8,4 @@ empty_schedule.json
 .idea
 src/
 .vscode/
+*.xlsx
