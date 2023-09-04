@@ -11,3 +11,4 @@ empty_schedule.json
 frontend/node_modules/
 frontend/coverage/
 frontend/build/
+first_year_scraper/__pycache__
