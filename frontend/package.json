@@ -10,7 +10,7 @@
     "react": "^16.13.1",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.13.1",
-    "react-scripts": "^1.1.1",
+    "react-scripts": "^5.0.1",
     "react-table": "^6.7.6",
     "save-dev": "0.0.1-security"
   },
