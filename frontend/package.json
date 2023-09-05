@@ -1,0 +1,29 @@
+{
+  "name": "chill",
+  "version": "0.1.0",
+  "private": true,
+  "homepage":"http://metakgp.github.io/chillzone-frontend",
+  "dependencies": {
+    "lodash.chunk": "^4.2.0",
+    "lodash.intersection": "^4.4.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-bootstrap": "^0.32.4",
+    "react-dom": "^16.13.1",
+    "react-scripts": "^1.1.1",
+    "react-table": "^6.7.6",
+    "save-dev": "0.0.1-security"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "eject": "react-scripts eject",
+    "heroku-prebuild": "npm install -g serve"
+  },
+  "devDependencies": {
+    "gh-pages": "^3.1.0"
+  }
+}
