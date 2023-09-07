@@ -1,2 +1,0 @@
-camelot-py==0.8.2
-opencv-python==4.4.0.42
