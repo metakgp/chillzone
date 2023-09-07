@@ -3,11 +3,11 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/joho/godotenv"
 	"io/ioutil"
 	"log"
 	"os"
-	"strings"
+
+	"github.com/joho/godotenv"
 )
 
 func add_subject(
@@ -84,7 +84,7 @@ func main() {
 			allSubjects[dep_val.Department] = dep_val.Subjects
 		}
 
-		b, err := json.Marshal(allSubjects)
+		b, err := json.MarshalIndent(allSubjects, "", "  ")
 		if err != nil {
 			b = []byte("")
 		}
@@ -105,34 +105,34 @@ func main() {
 		}
 	}
 
-	b, err := ioutil.ReadFile("first-year.csv")
-	first_years_exist := err == nil
-	if first_years_exist {
+	// b, err := ioutil.ReadFile("first-year.csv")
+	// first_years_exist := err == nil
+	// if first_years_exist {
 
-		first_year_subs := strings.Split(string(b), "\n")
-		for _, sub := range first_year_subs {
-			comps := strings.Split(sub, ",")
-			dep := string(comps[0])
-			sub_details := comps[1:]
-			if len(dep) != 2 {
-				continue
-			}
+	// 	first_year_subs := strings.Split(string(b), "\n")
+	// 	for _, sub := range first_year_subs {
+	// 		comps := strings.Split(sub, ",")
+	// 		dep := string(comps[0])
+	// 		sub_details := comps[1:]
+	// 		if len(dep) != 2 {
+	// 			continue
+	// 		}
 
-			allSubjects[dep] = append(allSubjects[dep], sub_details)
-		}
-	} else {
-		log.Printf("WARNING: First year timetable not taken into consideration")
-	}
+	// 		allSubjects[dep] = append(allSubjects[dep], sub_details)
+	// 	}
+	// } else {
+	// 	log.Printf("WARNING: First year timetable not taken into consideration")
+	// }
 
 	transformedMap := change_map_structure(allSubjects)
 
-	b, err = json.Marshal(transformedMap)
+	b, err := json.Marshal(transformedMap)
 	if err != nil {
 		log.Fatal("Could not marshal subjectDetails to JSON: ", err)
 	}
 
 	subjectDetails := build_subject_details(transformedMap)
-	b, err = json.Marshal(subjectDetails)
+	b, err = json.MarshalIndent(subjectDetails, "", "  ")
 	if err != nil {
 		log.Fatal("Could not marshal subjectDetails to JSON: ", err)
 	}
@@ -182,7 +182,7 @@ func main() {
 		schedule[p.Room][p.Day][p.Slot] = p.Value
 	}
 
-	b, err = json.Marshal(schedule)
+	b, err = json.MarshalIndent(schedule, "", "  ")
 	if err != nil {
 		log.Fatal("Could not marshal schedule to JSON: ", err)
 	}
@@ -192,7 +192,7 @@ func main() {
 	}
 
 	empty_schedule := build_empty_schedule(schedule)
-	b, err = json.Marshal(empty_schedule)
+	b, err = json.MarshalIndent(empty_schedule, "", "  ")
 	if err != nil {
 		log.Fatal("Couldn't convert empty schedule to JSON: ", err)
 	}
