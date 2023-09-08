@@ -1,5 +1,6 @@
 from openpyxl import load_workbook
 import json
+import os
 
 wb = load_workbook("workbook.xlsx")
 sheet = wb[wb.sheetnames[2]]
@@ -29,7 +30,7 @@ def generate_subjectDetails():
                     get_cell_value(5, i+4).upper()+" TUTORIAL",
                 ]
 
-    with open("../other-years-scraper/subjectDetails.json", "r") as json_data:
+    with open("../frontend/src/subjectDetails.json", "r") as json_data:
         subject_details = json.load(json_data)
     
     for key in subjects_dict.keys():

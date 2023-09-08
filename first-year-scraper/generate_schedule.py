@@ -20,9 +20,9 @@ def format_cell(original_value):
     return [x for sub in original_value.split("\n") for j in sub.split(" ") for x in j.split(",") if x]
 
 def generate_schedule(valid_sheets, wb, subjects_dict):
-    with open("../other-years-scraper/schedule.json", "r") as json_data:
+    with open("../frontend/src/schedule.json", "r") as json_data:
         schedule_dict = json.load(json_data)
-    with open("../other-years-scraper/empty_schedule.json", "r") as json_data:
+    with open("../frontend/src/empty_schedule.json", "r") as json_data:
         empty_schedule_dict = json.load(json_data)
     for sheet in valid_sheets:
         ws = wb[sheet]
@@ -47,10 +47,6 @@ def generate_schedule(valid_sheets, wb, subjects_dict):
 
     with open("../frontend/src/empty_schedule.json", "w") as outfile:
         json.dump(empty_schedule_dict, outfile, indent=2)
-
-# def generate_empty_schedule(schedule_dict):
-
-
 
 
 def format_excel(filename, subjects_dict):

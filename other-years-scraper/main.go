@@ -53,75 +53,56 @@ func main() {
 
 	allSubjects := make(map[string][][]string)
 
-	_, err = os.Stat("all_subjects.json")
-	no_file := err != nil
+	// _, err = os.Stat("all_subjects.json")
+	// no_file := err != nil
 
-	if no_file {
+	// if no_file {
 
-		accumulate_channel := make(chan ParsedResult)
+	accumulate_channel := make(chan ParsedResult)
 
-		for _, v := range departments {
-			dep := v.Code
-			go func() {
-				dep_html := dep_timetable(dep)
-				t := parse_html(dep_html)
-				log.Printf("Found %d subjects in department %s", len(t), dep)
-				accumulate_channel <- ParsedResult{t, dep}
+	for _, v := range departments {
+		dep := v.Code
+		go func() {
+			dep_html := dep_timetable(dep)
+			t := parse_html(dep_html)
+			log.Printf("Found %d subjects in department %s", len(t), dep)
+			accumulate_channel <- ParsedResult{t, dep}
 
-				if len(t) == 0 && InDebugMode() {
-					log.Fatal(fmt.Errorf("0 SUBJECTS FOUND.\nHTML OUTPUT: %s", dep_html))
-				}
+			if len(t) == 0 && InDebugMode() {
+				log.Fatal(fmt.Errorf("0 SUBJECTS FOUND.\nHTML OUTPUT: %s", dep_html))
+			}
 
-			}()
-		}
-
-		for i := 0; i < len(departments); i++ {
-			dep_val := <-accumulate_channel
-			log.Printf("Fetch completed for department %s with %d subjects",
-				dep_val.Department,
-				len(dep_val.Subjects))
-
-			allSubjects[dep_val.Department] = dep_val.Subjects
-		}
-
-		b, err := json.MarshalIndent(allSubjects, "", "  ")
-		if err != nil {
-			b = []byte("")
-		}
-
-		err = ioutil.WriteFile("all_subjects.json", b, 0644)
-		if err != nil {
-			log.Printf("Could not write subjects.json to file: %v", err)
-		}
-	} else {
-		b, err := ioutil.ReadFile("all_subjects.json")
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		err = json.Unmarshal(b, &allSubjects)
-		if err != nil {
-			log.Fatal(err)
-		}
+		}()
 	}
 
-	// b, err := ioutil.ReadFile("first-year.csv")
-	// first_years_exist := err == nil
-	// if first_years_exist {
+	for i := 0; i < len(departments); i++ {
+		dep_val := <-accumulate_channel
+		log.Printf("Fetch completed for department %s with %d subjects",
+			dep_val.Department,
+			len(dep_val.Subjects))
 
-	// 	first_year_subs := strings.Split(string(b), "\n")
-	// 	for _, sub := range first_year_subs {
-	// 		comps := strings.Split(sub, ",")
-	// 		dep := string(comps[0])
-	// 		sub_details := comps[1:]
-	// 		if len(dep) != 2 {
-	// 			continue
-	// 		}
+		allSubjects[dep_val.Department] = dep_val.Subjects
+	}
 
-	// 		allSubjects[dep] = append(allSubjects[dep], sub_details)
-	// 	}
+		// b, err := json.MarshalIndent(allSubjects, "", "  ")
+		// if err != nil {
+		// 	b = []byte("")
+		// }
+
+		// err = ioutil.WriteFile("all_subjects.json", b, 0644)
+		// if err != nil {
+		// 	log.Printf("Could not write subjects.json to file: %v", err)
+		// }
 	// } else {
-	// 	log.Printf("WARNING: First year timetable not taken into consideration")
+	// 	b, err := ioutil.ReadFile("all_subjects.json")
+	// 	if err != nil {
+	// 		log.Fatal(err)
+	// 	}
+
+	// 	err = json.Unmarshal(b, &allSubjects)
+	// 	if err != nil {
+	// 		log.Fatal(err)
+	// 	}
 	// }
 
 	transformedMap := change_map_structure(allSubjects)
@@ -136,7 +117,7 @@ func main() {
 	if err != nil {
 		log.Fatal("Could not marshal subjectDetails to JSON: ", err)
 	}
-	err = ioutil.WriteFile("subjectDetails.json", b, 0644)
+	err = ioutil.WriteFile("../frontend/src/subjectDetails.json", b, 0644)
 	if err != nil {
 		log.Fatal("Could not write to subjectDetails.json: ", err)
 	}
@@ -186,7 +167,7 @@ func main() {
 	if err != nil {
 		log.Fatal("Could not marshal schedule to JSON: ", err)
 	}
-	err = ioutil.WriteFile("schedule.json", b, 0644)
+	err = ioutil.WriteFile("../frontend/src/schedule.json", b, 0644)
 	if err != nil {
 		log.Fatal("Could not write to schedule.json: ", err)
 	}
@@ -196,7 +177,7 @@ func main() {
 	if err != nil {
 		log.Fatal("Couldn't convert empty schedule to JSON: ", err)
 	}
-	err = ioutil.WriteFile("empty_schedule.json", b, 0644)
+	err = ioutil.WriteFile("../frontend/src/empty_schedule.json", b, 0644)
 	if err != nil {
 		log.Fatal("Couldn't write the empty schedule JSON to file: ", err)
 	}
