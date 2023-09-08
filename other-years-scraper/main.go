@@ -53,11 +53,6 @@ func main() {
 
 	allSubjects := make(map[string][][]string)
 
-	// _, err = os.Stat("all_subjects.json")
-	// no_file := err != nil
-
-	// if no_file {
-
 	accumulate_channel := make(chan ParsedResult)
 
 	for _, v := range departments {
@@ -83,27 +78,6 @@ func main() {
 
 		allSubjects[dep_val.Department] = dep_val.Subjects
 	}
-
-		// b, err := json.MarshalIndent(allSubjects, "", "  ")
-		// if err != nil {
-		// 	b = []byte("")
-		// }
-
-		// err = ioutil.WriteFile("all_subjects.json", b, 0644)
-		// if err != nil {
-		// 	log.Printf("Could not write subjects.json to file: %v", err)
-		// }
-	// } else {
-	// 	b, err := ioutil.ReadFile("all_subjects.json")
-	// 	if err != nil {
-	// 		log.Fatal(err)
-	// 	}
-
-	// 	err = json.Unmarshal(b, &allSubjects)
-	// 	if err != nil {
-	// 		log.Fatal(err)
-	// 	}
-	// }
 
 	transformedMap := change_map_structure(allSubjects)
 
