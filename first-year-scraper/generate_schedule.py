@@ -3,11 +3,6 @@ import generate_subjectDetails
 import json
 
 
-def sanitise_sheets(valid_sheets, workbook):
-    for sheet in valid_sheets:
-        worksheet = workbook[sheet]
-        worksheet.delete_cols(1,2)
-        worksheet.delete_rows(1,2)
 
 def getkey(a, b):
     '''returns key for cell[a][b] in excel'''
@@ -24,15 +19,21 @@ def generate_schedule(valid_sheets, workbook, subjects_dict):
         schedule_dict = json.load(json_data)
     with open("../frontend/src/empty_schedule.json", "r") as json_data:
         empty_schedule_dict = json.load(json_data)
+
     for sheet in valid_sheets:
         worksheet = workbook[sheet]
-        if(worksheet['L2'].value is not None or worksheet['K2'].value is None):
+
+        if(worksheet['N4'].value is not None or worksheet['M4'].value is None):
             print("parsing error in sheet {}".format(sheet))
-            worksheet.delete_cols(5,1)
+
+            # for aut2023.pdf only page 5 has parsing error in which one column is repeated.
+            # manually deleting that column:
+            worksheet.delete_cols(7,1)
+        
         worksheet.delete_cols(7,1)
         for i in range(0, 6):
             for j in range(0, 9):
-                cell = worksheet[getkey(j+2, i+3)].value
+                cell = worksheet[getkey(j+4, i+5)].value
                 if cell is not None and ("NR" in cell or "NC" in cell):
                     cell_value = format_cell(cell)
                     for room in cell_value[1::]:
@@ -54,9 +55,6 @@ def format_excel(filename, subjects_dict):
     valid_sheets = [sheet for sheet in sheets if (workbook[sheet]['D10'].value == "EAA" or workbook[sheet]['E10'].value == "EAA")]
 
     print("count of sheets with timetable : {}".format(len(valid_sheets)))
-
-    sanitise_sheets(valid_sheets, workbook)
-    workbook.save(filename.split('.')[0]+"_new.xlsx")
 
     generate_schedule(valid_sheets, workbook, subjects_dict)
 
