@@ -107,7 +107,7 @@ Download first year timetable from ERP and place it in the `first-year-scraper/`
 ### Final steps
 
 1. Empty the `problems` array inside `main.go` 
-2. Run `chillzone.py`
+2. Run `update_data.py`
 
 ## Meanings of the various files
 
@@ -149,7 +149,7 @@ Download first year timetable from ERP and place it in the `first-year-scraper/`
 
 ## Maintainers
 
-Shivam Kumar Jha`<br/>`
+Shivam Kumar Jha <br/>
 @thealphadollar on GitHub and Metakgp Slack
 
 ## Contact
