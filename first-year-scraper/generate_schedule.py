@@ -30,7 +30,7 @@ def generate_schedule(valid_sheets, workbook, subjects_dict):
             # manually deleting that column:
             worksheet.delete_cols(7,1)
         
-        worksheet.delete_cols(7,1)
+        worksheet.delete_cols(9,1)
         for i in range(0, 6):
             for j in range(0, 9):
                 cell = worksheet[getkey(j+4, i+5)].value
