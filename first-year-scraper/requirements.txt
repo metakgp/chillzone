@@ -1,4 +1,4 @@
-camelot-py==0.11.0
+camelot-py>=0.11.0
 opencv-python
 ghostscript
 numpy<=1.23.5
