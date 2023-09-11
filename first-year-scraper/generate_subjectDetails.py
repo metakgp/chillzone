@@ -1,16 +1,16 @@
 from openpyxl import load_workbook
 import json
-import os
-
-wb = load_workbook("workbook.xlsx")
-sheet = wb[wb.sheetnames[2]]
-
 
 def get_cell_value(a, b):
     '''returns cell value for cell[a][b] in excel'''
     return sheet[str(chr(ord('A')+a-1))+str(b)].value
 
 def generate_subjectDetails():
+
+    workbook = load_workbook("workbook.xlsx")
+    global sheet
+    sheet = workbook[workbook.sheetnames[2]]
+
     subjects_dict = {}
 
     for i in range(0, 15):

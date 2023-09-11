@@ -1,4 +1,4 @@
-import camelot
+import camelot.io as camelot
 
 def parse_pdf(filename, target_filename):
     print("Started processing pdf file. This might take a while...")
