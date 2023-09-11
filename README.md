@@ -6,8 +6,8 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![Wiki][wiki-shield]][wiki-url]
 <!-- [![MIT License][license-shield]][license-url] -->
+[![Wiki][wiki-shield]][wiki-url]
 
 </div>
 
@@ -34,8 +34,9 @@
 
 - [Usage(Local Installation)](#usagelocal-installation)
 - [Updation for a new semester](#updation-for-a-new-semester)
-  - [Getting a valid `JSESSIONID`](#getting-a-valid-jsessionid)
-  - [Updating `.env` file](#updating-env-file)
+  - [For Second Year and above Timetable](#for-second-year-and-above-timetable)
+    - [Getting a valid `JSESSIONID`](#getting-a-valid-jsessionid)
+    - [Updating `.env` file](#updating-env-file)
   - [For First Year Timetable](#for-first-year-timetable)
   - [Final steps](#final-steps)
 - [Meanings of the various files](#meanings-of-the-various-files)
@@ -79,7 +80,9 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
 
 ## Updation for a new semester
 
-### Getting a valid `JSESSIONID`
+### For Second Year and above Timetable
+
+#### Getting a valid `JSESSIONID`
 
 1. Login to the ERP
 2. Go to Academic -> Timetable -> Subject List with Timetable Slots
@@ -87,7 +90,7 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
 4. Choose any department and wait for the time table to load
 5. After the time table is loaded, check the Network tab for the `POST timetable_track.js ...` request. Select this request; switch to the Cookies tab and copy the `JSESSIONID` cookie value.
   
-### Updating `.env` file
+#### Updating `.env` file
 
 > **Note**: Use `.env.template` file as the base for `.env` file
 
@@ -107,7 +110,7 @@ Download first year timetable from ERP and place it in the `first-year-scraper/`
 ### Final steps
 
 1. Empty the `problems` array inside `main.go` 
-2. Run `update_data.py`
+2. Run `update_data.sh`
 
 ## Meanings of the various files
 
@@ -188,6 +191,7 @@ Shivam Kumar Jha <br/>
 [stars-url]: https://github.com/metakgp/chillzone/stargazers
 [issues-shield]: https://img.shields.io/github/issues/metakgp/chillzone.svg?style=for-the-badge
 [issues-url]: https://github.com/metakgp/chillzone/issues
-<!-- [license-shield]: https://img.shields.io/github/license/metakgp/chillzone.svg?style=for-the-badge -->
+<!-- [license-shield]: https://img.shields.io/github/license/shikhar-irez/chillzone?label=license&style=for-the-badge
+[license-url]: https://github.com/shikhar-irez/chillzone/blob/new-readme/LICENSE -->
 [wiki-shield]: https://custom-icon-badges.demolab.com/badge/metakgp_wiki-grey?logo=metakgp_logo&logoColor=white&style=for-the-badge
 [wiki-url]: https://wiki.metakgp.org
