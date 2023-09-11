@@ -1,14 +1,11 @@
 .env
 chillzone
 t
-schedule.json
-subjectDetails.json
-all_subjects.json
-empty_schedule.json
 .idea
 .vscode/
 *.xlsx
 frontend/node_modules/
 frontend/coverage/
 frontend/build/
-first_year_scraper/__pycache__
+__pycache__/
+other-years-scraper/other-years-scraper

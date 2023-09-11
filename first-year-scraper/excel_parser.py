@@ -1,4 +1,4 @@
-import camelot
+import camelot.io as camelot
 
 def parse_pdf(filename, target_filename):
     print("Started processing pdf file. This might take a while...")
@@ -7,4 +7,4 @@ def parse_pdf(filename, target_filename):
     print("Done parsing pdf. exported as: ", target_filename)
 
 if __name__ == "__main__":
-    parse_pdf("spr2019.pdf","test.xlsx")
+    parse_pdf("test.pdf","test.xlsx")
