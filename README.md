@@ -32,12 +32,12 @@
 <details>
 <summary>Table of Contents</summary>
 
-- [Usage(Local Installation)](#usagelocal-installation)
+- [Local Installation](#local-installation)
 - [Updation for a new semester](#updation-for-a-new-semester)
+  - [For First Year Timetable](#for-first-year-timetable)
   - [For Second Year and above Timetable](#for-second-year-and-above-timetable)
     - [Getting a valid `JSESSIONID`](#getting-a-valid-jsessionid)
     - [Updating `.env` file](#updating-env-file)
-  - [For First Year Timetable](#for-first-year-timetable)
   - [Final steps](#final-steps)
 - [Meanings of the various files](#meanings-of-the-various-files)
   - [Input Files](#input-files)
@@ -46,7 +46,7 @@
 - [Contact](#contact)
 </details>
 
-## Usage(Local Installation)
+## Local Installation
 
 To run Chillzone front-end on your local system 
 
@@ -80,6 +80,18 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
 
 ## Updation for a new semester
 
+### For First Year Timetable
+
+> **Note**: First year timetable needs to be updated at the start of a new session only.
+
+1. Download first year timetable from ERP and place it in the `first-year-scraper/` directory.
+2. Install dependencies
+   ```
+   cd first-year-scraper
+   
+   pip install -r requirements.txt
+   ```
+
 ### For Second Year and above Timetable
 
 #### Getting a valid `JSESSIONID`
@@ -100,12 +112,6 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
 > **Note:** In case you are unable to scrape the new semester's timetable, then, these steps will help you find the problem:
 > 1. Turn on `DEBUG` inside the `.env` file by setting it to `"1"`
 > 2. Reduce the size of the departments array to 2 so that you are not buried with output in the terminal.
-
-### For First Year Timetable
-
-> **Note**: First year timetable needs to be updated at the start of a new session only.
-
-Download first year timetable from ERP and place it in the `first-year-scraper/` directory.
 
 ### Final steps
 
