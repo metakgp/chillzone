@@ -6,7 +6,7 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-<!-- [![MIT License][license-shield]][license-url] -->
+[![GPL v3][license-shield]][license-url]
 [![Wiki][wiki-shield]][wiki-url]
 
 </div>
@@ -23,9 +23,9 @@
   <p align="center">
     <i>Will find you a chillzone inside IIT KGP at any time</i>
     <br />
-    <a href="https://github.com/metakgp/chillzone/issues">Report Bug</a>
+    <a href="https://chill.metakgp.org">Website</a>
     ·
-    <a href="https://github.com/metakgp/chillzone/issues">Request Feature</a>
+    <a href="https://github.com/metakgp/chillzone/issues">Report Bug</a>
   </p>
 </div>
 
@@ -44,29 +44,31 @@
   - [Output Files](#output-files)
 - [Maintainer(s)](#maintainers)
 - [Contact](#contact)
+- [Additional documentation](#additional-documentation)
 </details>
 
 ## Local Installation
 
-To run Chillzone front-end on your local system 
+To run Chillzone front-end on your local system
 
 1. Make sure you have `npm` installed on your system.
 2. Clone the repo and change directory
 
    ```
    git clone https://github.com/metakgp/chillzone
-   
+
    cd chillzone/frontend
    ```
+
 3. Install modules and launch frontend
-    ```
-    npm install
-    npm start
-    ```
+   ```
+   npm install
+   npm start
+   ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-<!-- 
+<!--
 ## How does it work?
 
 ### Request
@@ -79,7 +81,6 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
     --data 'for_session=2017-2018&for_semester=SPRING&dept=AE'
 ``` -->
 
-
 ## Updation for a new semester
 
 ### For First Year Timetable
@@ -88,9 +89,10 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
 
 1. Download first year timetable from ERP and place it in the `first-year-scraper/` directory.
 2. Install dependencies
+
    ```
    cd first-year-scraper
-   
+
    pip install -r requirements.txt
    ```
 
@@ -103,7 +105,7 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
 3. Open the browser console. Switch to the Network tab
 4. Choose any department and wait for the time table to load
 5. After the time table is loaded, check the Network tab for the `POST timetable_track.js ...` request. Select this request; switch to the Cookies tab and copy the `JSESSIONID` cookie value.
-  
+
 #### Updating `.env` file
 
 > **Note**: Use `.env.template` file as the base for `.env` file
@@ -112,12 +114,13 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
 2. Update the `SESSION` and `SEMESTER` environment variables.
 
 > **Note:** In case you are unable to scrape the new semester's timetable, then, these steps will help you find the problem:
+>
 > 1. Turn on `DEBUG` inside the `.env` file by setting it to `"1"`
 > 2. Reduce the size of the departments array to 2 so that you are not buried with output in the terminal.
 
 ### Final steps
 
-1. Empty the `problems` array inside `main.go` 
+1. Empty the `problems` array inside `main.go`
 2. Run `update_data.sh`
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -133,6 +136,7 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
   (say) too many students, the course might be moved to a bigger room C. Then,
   a few nodes can be added to the JSON file without touching other files and
   the schedule can be regenerated.
+
 - `first-year.csv`
 
   The first year timetable is not available by default on ERP, so we need to
@@ -148,11 +152,13 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
   matrix with 5 rows and 9 columns. Each element in the matrix is the subject
   code of the class that will be held in that room during that one-hour slot.
   This string can be empty to show that the room will remain empty.
+
 - `empty_schedule.json`
 
   This is a JSON file that stores a matrix with 5 rows and 9 columns. Each
   element of the matrix is a list of strings containing the list of rooms that
   are free during that one hour slot.
+
 - `subjectDetails.json`
 
   This JSON file is used to show the tooltip with the name of the course and
@@ -194,6 +200,15 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+## Additional documentation
+
+- [License](/LICENSE)
+- [Code of Conduct](/.github/CODE_OF_CONDUCT.md)
+- [Security Policy](/.github/SECURITY.md)
+- [Contribution Guidelines](/.github/CONTRIBUTING.md)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 <!-- MARKDOWN LINKS & IMAGES -->
 
 [contributors-shield]: https://img.shields.io/github/contributors/metakgp/chillzone.svg?style=for-the-badge
@@ -204,7 +219,7 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
 [stars-url]: https://github.com/metakgp/chillzone/stargazers
 [issues-shield]: https://img.shields.io/github/issues/metakgp/chillzone.svg?style=for-the-badge
 [issues-url]: https://github.com/metakgp/chillzone/issues
-<!-- [license-shield]: https://img.shields.io/github/license/shikhar-irez/chillzone?label=license&style=for-the-badge
-[license-url]: https://github.com/shikhar-irez/chillzone/blob/new-readme/LICENSE -->
+[license-shield]: https://img.shields.io/github/license/metakgp/chillzone.svg?style=for-the-badge
+[license-url]: https://github.com/metakgp/chillzone/blob/master/LICENSE
 [wiki-shield]: https://custom-icon-badges.demolab.com/badge/metakgp_wiki-grey?logo=metakgp_logo&logoColor=white&style=for-the-badge
 [wiki-url]: https://wiki.metakgp.org
