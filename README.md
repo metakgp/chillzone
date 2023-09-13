@@ -42,7 +42,7 @@
 - [Meanings of the various files](#meanings-of-the-various-files)
   - [Input Files](#input-files)
   - [Output Files](#output-files)
-- [Maintainers](#maintainers)
+- [Maintainer(s)](#maintainers)
 - [Contact](#contact)
 </details>
 
@@ -63,6 +63,8 @@ To run Chillzone front-end on your local system
     npm install
     npm start
     ```
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- 
 ## How does it work?
@@ -118,6 +120,8 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
 1. Empty the `problems` array inside `main.go` 
 2. Run `update_data.sh`
 
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 ## Meanings of the various files
 
 ### Input Files
@@ -156,10 +160,13 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
   webpage. It is a JSON file where the keys are subject codes and the values are
   strings with this structure: `<SUBJECT NAME> - <PROFESSOR NAMES>`.
 
-## Maintainers
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-Shivam Kumar Jha <br/>
-@thealphadollar on GitHub and Metakgp Slack
+## Maintainer(s)
+
+- [Chirag Ghosh](https://github.com/chirag-ghosh)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Contact
 
