@@ -1,29 +1,74 @@
-# Chillzone
+<div id="top"></div>
 
-> Will find you a chillzone inside IIT KGP at any time
+<div align="center">
 
-## TOC
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![GPL v3][license-shield]][license-url]
+[![Wiki][wiki-shield]][wiki-url]
 
-- [Organization of the code](#organization-of-the-code)
-- [How does it work?](#how-does-it-work)
+</div>
+
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/metakgp/chillzone">
+    <img width="140" alt="image" src="images/icons/icon_384x384.png">
+  </a>
+
+  <h1 align="center">Chillzone</h1>
+
+  <p align="center">
+    <i>Will find you a chillzone inside IIT KGP at any time</i>
+    <br />
+    <a href="https://chill.metakgp.org">Website</a>
+    ·
+    <a href="https://github.com/metakgp/chillzone/issues">Report Bug</a>
+  </p>
+</div>
+
+<details>
+<summary>Table of Contents</summary>
+
+- [Local Installation](#local-installation)
+- [Updation for a new semester](#updation-for-a-new-semester)
+  - [For First Year Timetable](#for-first-year-timetable)
+  - [For Second Year and above Timetable](#for-second-year-and-above-timetable)
+    - [Getting a valid `JSESSIONID`](#getting-a-valid-jsessionid)
+    - [Updating `.env` file](#updating-env-file)
+  - [Final steps](#final-steps)
 - [Meanings of the various files](#meanings-of-the-various-files)
-    - [Input files](#input-files)
-    - [Output files](#output-files)
+  - [Input Files](#input-files)
+  - [Output Files](#output-files)
+- [Maintainer(s)](#maintainers)
+- [Contact](#contact)
+- [Additional documentation](#additional-documentation)
+</details>
 
-## Organization of the code
+## Local Installation
 
-This repository serves as the data scraper. It will scrape data from the ERP
-using the given credentials. After that, you must copy the following files into
-`chill/src/`
+To run Chillzone front-end on your local system
 
-1. `schedule.json`
-1. `empty_schedule.json`
-1. `subjectDetails.json`
+1. Make sure you have `npm` installed on your system.
+2. Clone the repo and change directory
 
-The submodule "chill" is the frontend that will use these JSON files to generate
-the static webpage. It is hosted on
-[GitHub](https://github.com/icyflame/chillzone-frontend).
+   ```
+   git clone https://github.com/metakgp/chillzone
 
+   cd chillzone/frontend
+   ```
+
+3. Install modules and launch frontend
+   ```
+   npm install
+   npm start
+   ```
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!--
 ## How does it work?
 
 ### Request
@@ -34,36 +79,51 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
     -H 'Content-Type: application/x-www-form-urlencoded' \
     -H 'Cookie: JSESSIONID=ABCD.worker3;' \
     --data 'for_session=2017-2018&for_semester=SPRING&dept=AE'
-```
+``` -->
 
-### Getting a valid `JSESSIONID`
+## Updation for a new semester
+
+### For First Year Timetable
+
+> **Note**: First year timetable needs to be updated at the start of a new session only.
+
+1. Download first year timetable from ERP and place it in the `first-year-scraper/` directory.
+2. Install dependencies
+
+   ```
+   cd first-year-scraper
+
+   pip install -r requirements.txt
+   ```
+
+### For Second Year and above Timetable
+
+#### Getting a valid `JSESSIONID`
 
 1. Login to the ERP
-1. Go to Academic -> Timetable -> Subject List with Timetable Slots
-1. Open the browser console. Switch to the Network tab
-1. Choose any department and wait for the time table to load
-1. After the time table is loaded, check the Network tab for the `POST
-   timetable_track.js ...` request. Select this request; switch to the Cookies
-   tab and copy the `JSESSIONID` cookie value to your `.env` file
+2. Go to Academic -> Timetable -> Subject List with Timetable Slots
+3. Open the browser console. Switch to the Network tab
+4. Choose any department and wait for the time table to load
+5. After the time table is loaded, check the Network tab for the `POST timetable_track.js ...` request. Select this request; switch to the Cookies tab and copy the `JSESSIONID` cookie value.
 
-### Updation for a new semester
+#### Updating `.env` file
 
-1. Get a valid `JSESSIONID`. Put this in the `.env` file (using `.env.template`
-   as the base for this file)
-1. Update the `SESSION` and `SEMESTER` environment variables
-1. Delete the `all_subjects.json` file
-1. Delete the `first-year.csv` file. You need to populate this file manually
-   using `first-year.csv.template` as a reference
+> **Note**: Use `.env.template` file as the base for `.env` file
+
+1. Update the `JSESSIONID` environment variable with the copied value.
+2. Update the `SESSION` and `SEMESTER` environment variables.
+
+> **Note:** In case you are unable to scrape the new semester's timetable, then, these steps will help you find the problem:
+>
+> 1. Turn on `DEBUG` inside the `.env` file by setting it to `"1"`
+> 2. Reduce the size of the departments array to 2 so that you are not buried with output in the terminal.
+
+### Final steps
+
 1. Empty the `problems` array inside `main.go`
-1. Run `go build && ./chillzone`. This will build and run the `main` function
-   inside `main.go`
+2. Run `update_data.sh`
 
-**Note:** In case you are unable to scrape the new semester's timetable, then,
-these steps will help you find the problem:
-
-1. Turn on `DEBUG` inside the `.env` by setting it to `"1"`
-1. Reduce the size of the departments array to 2 so that you are not buried with
-   output in the terminal
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Meanings of the various files
 
@@ -71,42 +131,95 @@ these steps will help you find the problem:
 
 - `problems.json`
 
-    JSON file that stores problems reported by users. Sometimes, the ERP might
-    show that course A is scheduled to be held in room B, but later, due to
-    (say) too many students, the course might be moved to a bigger room C. Then,
-    a few nodes can be added to the JSON file without touching other files and
-    the schedule can be regenerated.
+  JSON file that stores problems reported by users. Sometimes, the ERP might
+  show that course A is scheduled to be held in room B, but later, due to
+  (say) too many students, the course might be moved to a bigger room C. Then,
+  a few nodes can be added to the JSON file without touching other files and
+  the schedule can be regenerated.
 
 - `first-year.csv`
 
-    The first year timetable is not available by default on ERP, so we need to
-    add it manually using the central timetable PDF. This CSV file will be taken
-    into consideration when the schedule is constructed. Refer to the template
-    for details.
+  The first year timetable is not available by default on ERP, so we need to
+  add it manually using the central timetable PDF. This CSV file will be taken
+  into consideration when the schedule is constructed. Refer to the template
+  for details.
 
 ### Output Files
 
 - `schedule.json`
 
-    This is JSON file whose keys are the names of the rooms. Each value is a
-    matrix with 5 rows and 9 columns. Each element in the matrix is the subject
-    code of the class that will be held in that room during that one-hour slot.
-    This string can be empty to show that the room will remain empty.
+  This is JSON file whose keys are the names of the rooms. Each value is a
+  matrix with 5 rows and 9 columns. Each element in the matrix is the subject
+  code of the class that will be held in that room during that one-hour slot.
+  This string can be empty to show that the room will remain empty.
 
 - `empty_schedule.json`
 
-    This is a JSON file that stores a matrix with 5 rows and 9 columns. Each
-    element of the matrix is a list of strings containing the list of rooms that
-    are free during that one hour slot.
+  This is a JSON file that stores a matrix with 5 rows and 9 columns. Each
+  element of the matrix is a list of strings containing the list of rooms that
+  are free during that one hour slot.
 
 - `subjectDetails.json`
 
-    This JSON file is used to show the tooltip with the name of the course and
-    the name of the professors on top of the timetable entry in the chillzone
-    webpage. It is a JSON file where the keys are subject codes and the values are
-    strings with this structure: `<SUBJECT NAME> - <PROFESSOR NAMES>`.
+  This JSON file is used to show the tooltip with the name of the course and
+  the name of the professors on top of the timetable entry in the chillzone
+  webpage. It is a JSON file where the keys are subject codes and the values are
+  strings with this structure: `<SUBJECT NAME> - <PROFESSOR NAMES>`.
 
-## Maintainer
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-Shivam Kumar Jha<br/>
-@thealphadollar on GitHub and Metakgp Slack
+## Maintainer(s)
+
+- [Chirag Ghosh](https://github.com/chirag-ghosh)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Contact
+
+<p>
+📫 Metakgp -
+<a href="https://bit.ly/metakgp-slack">
+  <img align="center" alt="Metakgp's slack invite" width="22px" src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/slack.svg" />
+</a>
+<a href="mailto:metakgp@gmail.com">
+  <img align="center" alt="Metakgp's email " width="22px" src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/gmail.svg" />
+</a>
+<a href="https://www.facebook.com/metakgp">
+  <img align="center" alt="metakgp's Facebook" width="22px" src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/facebook.svg" />
+</a>
+<a href="https://www.linkedin.com/company/metakgp-org/">
+  <img align="center" alt="metakgp's LinkedIn" width="22px" src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/linkedin.svg" />
+</a>
+<a href="https://twitter.com/metakgp">
+  <img align="center" alt="metakgp's Twitter " width="22px" src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/twitter.svg" />
+</a>
+<a href="https://www.instagram.com/metakgp_/">
+  <img align="center" alt="metakgp's Instagram" width="22px" src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/instagram.svg" />
+</a>
+</p>
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Additional documentation
+
+- [License](/LICENSE)
+- [Code of Conduct](/.github/CODE_OF_CONDUCT.md)
+- [Security Policy](/.github/SECURITY.md)
+- [Contribution Guidelines](/.github/CONTRIBUTING.md)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+
+[contributors-shield]: https://img.shields.io/github/contributors/metakgp/chillzone.svg?style=for-the-badge
+[contributors-url]: https://github.com/metakgp/chillzone/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/metakgp/chillzone.svg?style=for-the-badge
+[forks-url]: https://github.com/metakgp/chillzone/network/members
+[stars-shield]: https://img.shields.io/github/stars/metakgp/chillzone.svg?style=for-the-badge
+[stars-url]: https://github.com/metakgp/chillzone/stargazers
+[issues-shield]: https://img.shields.io/github/issues/metakgp/chillzone.svg?style=for-the-badge
+[issues-url]: https://github.com/metakgp/chillzone/issues
+[license-shield]: https://img.shields.io/github/license/metakgp/chillzone.svg?style=for-the-badge
+[license-url]: https://github.com/metakgp/chillzone/blob/master/LICENSE
+[wiki-shield]: https://custom-icon-badges.demolab.com/badge/metakgp_wiki-grey?logo=metakgp_logo&logoColor=white&style=for-the-badge
+[wiki-url]: https://wiki.metakgp.org
