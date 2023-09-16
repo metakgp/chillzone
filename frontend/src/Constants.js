@@ -1,3 +1,5 @@
+export const NETWORK_CHECK_URL = "http://10.72.36.251";
+
 export const Slots = [
   "8 am",
   "9 am ",
@@ -9,13 +11,15 @@ export const Slots = [
   "4 pm",
   "5 pm",
 ];
+
 export const DayNames = [
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday'
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
 ];
+
 export const HourSlotMap = {
   8: 0,
   9: 1,
@@ -28,16 +32,18 @@ export const HourSlotMap = {
   16: 7,
   17: 8,
 };
+
 export const Complexes = {
-  "Any": "",
-  "NC":"NC",
-  "NR":"NR",
-  "Vikramshila":"V"
-}; 
+  Any: "",
+  NC: "NC",
+  NR: "NR",
+  Vikramshila: "V",
+};
+
 export const Floors = {
-  "Any": "",
-  "1": "1",
-  "2": "2",
-  "3": "3",
-  "4": "4"
-}
+  Any: "",
+  1: "1",
+  2: "2",
+  3: "3",
+  4: "4",
+};
