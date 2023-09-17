@@ -31,13 +31,14 @@ export async function isInsideCampusNetwork() {
 
   try {
     const response = await fetch(NETWORK_CHECK_URL, {
-      mode: "no-cors",
       timeout: TIMEOUT,
       signal: controller.signal,
     });
     clearTimeout(id);
 
-    if (response) return true;
+    const data = await response.json();
+
+    if (data.is_inside_kgp) return true;
     return false;
   } catch (err) {
     return false;

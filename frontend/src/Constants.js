@@ -1,4 +1,4 @@
-export const NETWORK_CHECK_URL = "http://10.72.36.251";
+export const NETWORK_CHECK_URL = "https://campus.kossiitkgp.org";
 
 export const Slots = [
   "8 am",
