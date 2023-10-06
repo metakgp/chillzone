@@ -120,8 +120,7 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
 
 ### Final steps
 
-1. Empty the `problems` array inside `main.go`
-2. Run `update_data.sh`
+1. Run `update_data.sh`
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
