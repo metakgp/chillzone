@@ -2,7 +2,7 @@
   "name": "chill",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://metakgp.github.io/chillzone",
+  "homepage": "https://chill.metakgp.org",
   "dependencies": {
     "lodash.chunk": "^4.2.0",
     "lodash.intersection": "^4.4.0",
