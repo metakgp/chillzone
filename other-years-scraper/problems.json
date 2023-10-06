@@ -1,0 +1,26 @@
+[
+    {
+        "Room": "NR423",
+        "Day": 2,
+        "Slot": 2,
+        "Value": ""
+    },
+    {
+        "Room": "NR423",
+        "Day": 3,
+        "Slot": 1,
+        "Value": ""
+    },
+    {
+        "Room": "NR423",
+        "Day": 4,
+        "Slot": 3,
+        "Value": ""
+    },
+    {
+        "Room": "NR423",
+        "Day": 4,
+        "Slot": 4,
+        "Value": "" 
+    }
+]
