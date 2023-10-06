@@ -6,10 +6,13 @@
     "code": "AG"
   },
   {
+    "code": "AI"
+  },
+  {
     "code": "AR"
   },
   {
-    "code": "AT"
+    "code": "AT"  
   },
   {
     "code": "BE"
@@ -55,6 +58,9 @@
   },
   {
     "code": "EF"
+  },
+  {
+    "code": "EP"
   },
   {
     "code": "ES"
@@ -126,7 +132,13 @@
     "code": "RX"
   },
   {
+    "code": "SD"
+  },
+  {
     "code": "SL"
+  },
+  {
+    "code": "TE"
   },
   {
     "code": "TS"

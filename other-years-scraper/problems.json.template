@@ -4,5 +4,11 @@
         "Day": 2,
         "Slot": 5,
         "Value": "BS20001"
+    },
+    {
+        "Room": "NR121",
+        "Day": 3,
+        "Slot": 4,
+        "Value": ""
     }
 ]
