@@ -51,7 +51,7 @@
 
 To run Chillzone front-end on your local system
 
-1. Make sure you have `npm` installed on your system.
+1. Make sure you have `pnpm` installed on your system. Installation instructions can be found [here](https://pnpm.io/installation).
 2. Clone the repo and change directory
 
    ```
@@ -62,8 +62,8 @@ To run Chillzone front-end on your local system
 
 3. Install modules and launch frontend
    ```
-   npm install
-   npm start
+   pnpm install
+   pnpm start
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
