@@ -4,7 +4,7 @@ import { Table } from 'react-bootstrap';
 import { DayNames, Slots, Complexes, Floors } from './Constants.js';
 import chunk from 'lodash.chunk';
 import intersection from 'lodash.intersection';
-import { getNextSlot, getPrevSlot } from './Utilities.js';
+import { getNextSlot, getPrevSlot, emptyAllDay } from './Utilities.js';
 
 class EmptyRooms extends Component {
   constructor() {
@@ -64,6 +64,8 @@ class EmptyRooms extends Component {
 
     let common_rooms = [ ]
 
+    let empty_all_day = emptyAllDay(this.props.schedule[day])
+
     if (this.props.show_common_next) {
       let next = getNextSlot(day, slot)
       let next_day = next.day;
@@ -88,17 +90,13 @@ class EmptyRooms extends Component {
             {schedule_chunked.map((val) => (
               <tr>
                 {val.map((room) => {
-                  let default_text = room;
-                  if (common_rooms.indexOf(room) >= 0) {
-                    default_text = (
-                      <b>
-                        {room}
-                      </b>
-                    );
-                  }
                   return (
-                    <td>
-                      {default_text}
+                    <td 
+                      className={
+                        (common_rooms.includes(room) ? "bold " : "") +
+                        (empty_all_day.includes(room) ? "yellowWarn" : "")
+                      }>
+                      {room}
                     </td>
                   )
                 })}
