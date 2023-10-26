@@ -64,7 +64,7 @@ class EmptyRooms extends Component {
 
     let common_rooms = [ ]
 
-    //list af all rooms that are empty in all slots for the day
+    //list of all rooms that are empty in all slots for the day
     let empty_all_day = emptyAllDay(this.props.schedule[day])
 
     if (this.props.show_common_next) {

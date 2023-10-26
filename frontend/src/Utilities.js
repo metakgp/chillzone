@@ -37,7 +37,7 @@ export function emptyAllDay(daySchedule) {
       var room = slot[y];
       if(result.indexOf(room) === -1) {
 
-        //check if room exist in all and store in flag "emptyInAll"
+        //check if room exists in all slots & store in flag "emptyInAll"
         var emptyInAll = true;
         for(var x = 0; x < daySchedule.length; x++) {
           if(daySchedule[x].indexOf(room) === -1) {
