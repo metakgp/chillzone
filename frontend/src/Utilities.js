@@ -24,24 +24,19 @@ export function getPrevSlot(day, slot) {
   };
 }
 
-function intersection() {
+
+// returns list of rooms that are empty the entire day
+export function emptyAllDay(daySchedule) {
   var result = [];
-  var lists;
 
-  if(arguments.length === 1) {
-    lists = arguments[0];
-  } else {
-    lists = arguments;
-  }
-
-  for(var i = 0; i < lists.length; i++) {
-    var currentList = lists[i];
+  for(var i = 0; i < daySchedule.length; i++) {
+    var currentList = daySchedule[i];
     for(var y = 0; y < currentList.length; y++) {
         var currentValue = currentList[y];
       if(result.indexOf(currentValue) === -1) {
         var existsInAll = true;
-        for(var x = 0; x < lists.length; x++) {
-          if(lists[x].indexOf(currentValue) === -1) {
+        for(var x = 0; x < daySchedule.length; x++) {
+          if(daySchedule[x].indexOf(currentValue) === -1) {
             existsInAll = false;
             break;
           }
@@ -53,10 +48,6 @@ function intersection() {
     }
   }
   return result;
-}
-
-export function emptyAllDay(daySchedule) {
-  return(intersection(daySchedule))
 }
 
 export async function isInsideCampusNetwork() {
