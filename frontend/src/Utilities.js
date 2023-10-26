@@ -29,6 +29,7 @@ export function getPrevSlot(day, slot) {
 export function emptyAllDay(daySchedule) {
   var result = [];
 
+  //intersects all the slots of a daySchedule
   for(var i = 0; i < daySchedule.length; i++) {
     var currentList = daySchedule[i];
     for(var y = 0; y < currentList.length; y++) {
