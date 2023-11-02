@@ -102,7 +102,7 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
 
 1. Login to the ERP
 2. Go to Academic -> Timetable -> Subject List with Timetable Slots
-3. Open the browser console. Switch to the Network tab
+3. Open the browser console. Switch to the Network tab [Windows: `ctrl + shift + j` - macOS: `cmd + shift + c`]
 4. Choose any department and wait for the time table to load
 5. After the time table is loaded, check the Network tab for the `POST timetable_track.js ...` request. Select this request; switch to the Cookies tab and copy the `JSESSIONID` cookie value.
 
