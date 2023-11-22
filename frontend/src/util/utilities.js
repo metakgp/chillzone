@@ -1,4 +1,4 @@
-import { NETWORK_CHECK_URL } from "./Constants";
+import { NETWORK_CHECK_URL } from "../constants/constants.js";
 
 export function getNextSlot(day, slot) {
   let next_day = day;
