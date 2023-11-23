@@ -1,4 +1,4 @@
-import { NETWORK_CHECK_URL } from "../constants/constants.js";
+import { HourSlotMap, NETWORK_CHECK_URL } from "../constants/constants.js";
 
 export function getNextSlot(day, slot) {
   let next_day = day;
@@ -22,6 +22,27 @@ export function getPrevSlot(day, slot) {
     day: prev_day,
     slot: (slot - 1) % 9,
   };
+}
+
+export function getInitialChillPlaceDetails() {
+  let slot = 0,
+    today = new Date(),
+    complex = "Any",
+    floor = "Any";
+
+  let day = today.getDay() - 1;
+  let isWeekend = day < 0 || day >= 5;
+  day = isWeekend ? 0 : day;
+  slot = isWeekend ? 0 : HourSlotMap[today.getHours()];
+
+  if (slot === undefined) {
+    let hour = today.getHours();
+    slot = 0;
+    if (hour >= 18) {
+      day = (day + 1) % 9;
+    }
+  }
+  return { day, slot, complex, floor, isWeekend };
 }
 
 export async function isInsideCampusNetwork() {

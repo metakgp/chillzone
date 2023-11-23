@@ -50,7 +50,7 @@ function App({ schedule, empty_schedule }) {
         <h3>Find a place to chill, NOW!</h3>
       </header>
 
-      <TwoSlotDisplay date={new Date()} schedule={empty_schedule} />
+      <TwoSlotDisplay schedule={empty_schedule} />
 
       <EmptyRoomsTable schedule={empty_schedule} />
       {Object.keys(schedule).map((key) => {
