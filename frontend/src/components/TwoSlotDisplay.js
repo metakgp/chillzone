@@ -1,27 +1,27 @@
 import React, { useReducer } from "react";
 import PropTypes from "prop-types";
-import EmptyRooms from "./EmptyRoomsOnSlot.js";
+import EmptyRooms from "./EmptyRooms.js";
 import { Slots, DayNames, Complexes, Floors } from "../constants/constants.js";
 import { getNextSlot, getInitialChillPlaceDetails } from "../util/utilities.js";
 import { CHILLPLACE_DISPATCH_TYPES } from "../constants/constants.js";
 
 const chillPlaceDetailsReducer = (state, action) => {
   switch (action.type) {
-    case "CHANGE_DAY":
+    case CHILLPLACE_DISPATCH_TYPES.CHANGE_DAY:
       const newDay = action.payload.day;
       return {
         ...state,
         day: newDay,
       };
-    case "CHANGE_SLOT": {
+    case CHILLPLACE_DISPATCH_TYPES.CHANGE_SLOT: {
       const newSlot = action.payload.slot;
       return { ...state, slot: newSlot };
     }
-    case "CHANGE_COMPLEX": {
+    case CHILLPLACE_DISPATCH_TYPES.CHANGE_COMPLEX: {
       const newComplex = action.payload.complex;
       return { ...state, complex: newComplex };
     }
-    case "CHANGE_FLOOR": {
+    case CHILLPLACE_DISPATCH_TYPES.CHANGE_FLOOR: {
       const newFloor = action.payload.floor;
       return { ...state, floor: newFloor };
     }

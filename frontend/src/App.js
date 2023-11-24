@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import CustomTable from "./components/CustomTable.js";
+import CustomTable from "./components/CustomTable/CustomTable.js";
 import PropTypes from "prop-types";
-import EmptyRoomsTable from "./components/EmptyRoomsTable.js";
+import EmptyRoomsTable from "./components/EmptyRoomTable/EmptyRoomsTable.js";
 import TwoSlotDisplay from "./components/TwoSlotDisplay.js";
 import Logo from "./navbar-icon.svg";
 import { isInsideCampusNetwork } from "./util/utilities.js";
