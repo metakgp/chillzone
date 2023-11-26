@@ -1,6 +1,7 @@
-import { HourSlotMap, NETWORK_CHECK_URL } from "../constants/constants.js";
+import { HourSlotMap, NETWORK_CHECK_URL } from "../constants/constants";
+import { ChillPlace, ChillPlaceDetails, Complex, Floor } from "../lib/types";
 
-export function getNextSlot(day, slot) {
+export function getNextSlot(day: number, slot: number) {
   let next_day = day;
   if (slot === 8) {
     next_day = (day + 1) % 5;
@@ -12,7 +13,7 @@ export function getNextSlot(day, slot) {
   };
 }
 
-export function getPrevSlot(day, slot) {
+export function getPrevSlot(day: number, slot: number) {
   let prev_day = day;
   if (slot === 0) {
     prev_day = (day - 1) % 5;
@@ -24,24 +25,32 @@ export function getPrevSlot(day, slot) {
   };
 }
 
-export function getInitialChillPlaceDetails() {
+export function getInitialChillPlaceDetails(): ChillPlaceDetails {
   let slot = 0,
     today = new Date(),
-    complex = "Any",
-    floor = "Any";
+    complex: Complex = "Any",
+    floor: Floor = "Any";
 
   let day = today.getDay() - 1;
   let isWeekend = day < 0 || day >= 5;
   day = isWeekend ? 0 : day;
-  slot = isWeekend ? 0 : HourSlotMap[today.getHours()];
-
-  if (slot === undefined) {
-    let hour = today.getHours();
+  const hours = today.getHours();
+  if (hours in HourSlotMap) {
+    slot = isWeekend ? 0 : HourSlotMap[hours as keyof typeof HourSlotMap];
+  } else {
     slot = 0;
-    if (hour >= 18) {
+    if (hours >= 18) {
       day = (day + 1) % 9;
     }
   }
+
+  // if (slot === undefined) {
+  //   let hour = today.getHours();
+  //   slot = 0;
+  //   if (hour >= 18) {
+  //     day = (day + 1) % 9;
+  //   }
+  // }
   return { day, slot, complex, floor, isWeekend };
 }
 
@@ -52,7 +61,6 @@ export async function isInsideCampusNetwork() {
 
   try {
     const response = await fetch(NETWORK_CHECK_URL, {
-      timeout: TIMEOUT,
       signal: controller.signal,
     });
     clearTimeout(id);

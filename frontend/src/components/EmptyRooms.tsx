@@ -1,12 +1,22 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Table } from "react-bootstrap";
-import { DayNames, Slots, Complexes, Floors } from "../constants/constants.js";
+import { DayNames, Slots, Complexes, Floors } from "../constants/constants";
 import chunk from "lodash.chunk";
 import intersection from "lodash.intersection";
-import { getNextSlot, getPrevSlot } from "../util/utilities.js";
+import { getNextSlot, getPrevSlot } from "../util/utilities";
+import { Complex, Floor } from "../lib/types";
 
-function EmptyRooms(props) {
+type EmptyRoomsProps = {
+  schedule: string[][][];
+  day: number;
+  slot: number;
+  floor: Floor;
+  complex: Complex;
+  show_common_next?: boolean;
+  show_common_prev?: boolean;
+};
+
+function EmptyRooms(props: EmptyRoomsProps) {
   let day = props.day,
     slot = props.slot,
     complex = props.complex,
@@ -50,7 +60,7 @@ function EmptyRooms(props) {
 
   let schedule_chunked = chunk(schedule, 4);
 
-  let common_rooms = [];
+  let common_rooms: string[] = [];
 
   if (props.show_common_next) {
     let next = getNextSlot(day, slot);
@@ -77,12 +87,12 @@ function EmptyRooms(props) {
       <h3>
         Empty Rooms on {DayNames[day]} from {Slots[slot]}
       </h3>
-      <Table striped bordered condensed hover>
+      <Table striped bordered hover>
         <tbody>
           {schedule_chunked.map((val) => (
             <tr>
               {val.map((room) => {
-                let default_text = room;
+                let default_text: React.ReactNode | string = room;
                 if (common_rooms.indexOf(room) >= 0) {
                   default_text = <b>{room}</b>;
                 }
@@ -95,14 +105,5 @@ function EmptyRooms(props) {
     </div>
   );
 }
-
-EmptyRooms.propTypes = {
-  schedule: PropTypes.array.isRequired,
-  day: PropTypes.number.isRequired,
-  slot: PropTypes.number.isRequired,
-  complex: PropTypes.string.isRequired,
-  show_common_next: PropTypes.boolean,
-  show_common_prev: PropTypes.boolean,
-};
 
 export default EmptyRooms;

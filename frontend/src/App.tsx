@@ -1,19 +1,24 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
-import CustomTable from "./components/CustomTable/CustomTable.js";
-import PropTypes from "prop-types";
-import EmptyRoomsTable from "./components/EmptyRoomTable/EmptyRoomsTable.js";
-import TwoSlotDisplay from "./components/TwoSlotDisplay.js";
+import CustomTable from "./components/CustomTable";
+import EmptyRoomsTable from "./components/EmptyRoomsTable";
 import Logo from "./navbar-icon.svg";
-import { isInsideCampusNetwork } from "./util/utilities.js";
+import TwoSlotDisplay from "./components/TwoSlotDisplay";
+import { isInsideCampusNetwork } from "./util/utilities";
+import { EmptySchedule, Schedule } from "./lib/types";
 
-function App({ schedule, empty_schedule }) {
-  const [loading, setLoading] = useState(true);
-  const [show, setShow] = useState(false);
+type AppProps = {
+  schedule: Schedule;
+  emptySchedule: EmptySchedule;
+};
+
+function App({ schedule, emptySchedule }: AppProps) {
+  const [loading, setLoading] = useState<boolean>(true);
+  const [show, setShow] = useState<boolean>(false);
 
   useEffect(() => {
     isInsideCampusNetwork()
-      .then((value) => {
+      .then((value: boolean) => {
         setShow(value);
         setLoading(false);
       })
@@ -50,19 +55,16 @@ function App({ schedule, empty_schedule }) {
         <h3>Find a place to chill, NOW!</h3>
       </header>
 
-      <TwoSlotDisplay schedule={empty_schedule} />
+      <TwoSlotDisplay schedule={emptySchedule} />
 
-      <EmptyRoomsTable schedule={empty_schedule} />
-      {Object.keys(schedule).map((key) => {
-        return <CustomTable room={key} schedule={schedule[key]} />;
+      <EmptyRoomsTable schedule={emptySchedule} />
+      {Object.keys(schedule).map((key: string) => {
+        return (
+          <CustomTable room={key} schedule={schedule[key as keyof Schedule]} />
+        );
       })}
     </div>
   );
 }
-
-App.propTypes = {
-  schedule: PropTypes.object.isRequired,
-  empty_schedule: PropTypes.array.isRequired,
-};
 
 export default App;

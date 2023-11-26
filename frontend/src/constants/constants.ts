@@ -48,9 +48,9 @@ export const Floors = {
   4: "4",
 };
 
-export const CHILLPLACE_DISPATCH_TYPES = {
+export const DISPATCH_TYPES = {
   CHANGE_DAY: "CHANGE_DAY",
   CHANGE_SLOT: "CHANGE_SLOT",
   CHANGE_COMPLEX: "CHANGE_COMPLEX",
   CHANGE_FLOOR: "CHANGE_FLOOR",
-};
+} as const;

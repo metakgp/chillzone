@@ -1,38 +1,61 @@
-import React, { useReducer } from "react";
-import PropTypes from "prop-types";
-import EmptyRooms from "./EmptyRooms.js";
-import { Slots, DayNames, Complexes, Floors } from "../constants/constants.js";
-import { getNextSlot, getInitialChillPlaceDetails } from "../util/utilities.js";
-import { CHILLPLACE_DISPATCH_TYPES } from "../constants/constants.js";
+import { useReducer } from "react";
+import EmptyRooms from "./EmptyRooms";
+import {
+  Slots,
+  DayNames,
+  Complexes,
+  Floors,
+  DISPATCH_TYPES,
+} from "../constants/constants";
+import { getNextSlot, getInitialChillPlaceDetails } from "../util/utilities";
+import {
+  EmptySchedule,
+  ChillPlaceAction,
+  ChillPlaceDetails,
+  ChangeDayAction,
+  ChangeSlotAction,
+  ChangeComplexAction,
+  ChangeFloorAction,
+  Complex,
+  Floor,
+} from "../lib/types";
 
-const chillPlaceDetailsReducer = (state, action) => {
+const reducer = (state: ChillPlaceDetails, action: ChillPlaceAction) => {
   switch (action.type) {
-    case CHILLPLACE_DISPATCH_TYPES.CHANGE_DAY:
-      const newDay = action.payload.day;
-      return {
-        ...state,
-        day: newDay,
-      };
-    case CHILLPLACE_DISPATCH_TYPES.CHANGE_SLOT: {
-      const newSlot = action.payload.slot;
-      return { ...state, slot: newSlot };
+    case DISPATCH_TYPES.CHANGE_DAY:
+      const newDay = (action as ChangeDayAction).payload.day;
+      if (newDay) {
+        return {
+          ...state,
+          day: newDay,
+        };
+      }
+    case DISPATCH_TYPES.CHANGE_SLOT: {
+      const newSlot = (action as ChangeSlotAction).payload.slot;
+      if (newSlot) {
+        return { ...state, slot: newSlot };
+      }
     }
-    case CHILLPLACE_DISPATCH_TYPES.CHANGE_COMPLEX: {
-      const newComplex = action.payload.complex;
-      return { ...state, complex: newComplex };
+    case DISPATCH_TYPES.CHANGE_COMPLEX: {
+      const newComplex = (action as ChangeComplexAction).payload.complex;
+      if (newComplex) {
+        return { ...state, complex: newComplex };
+      }
     }
-    case CHILLPLACE_DISPATCH_TYPES.CHANGE_FLOOR: {
-      const newFloor = action.payload.floor;
-      return { ...state, floor: newFloor };
+    case DISPATCH_TYPES.CHANGE_FLOOR: {
+      const newFloor = (action as ChangeFloorAction).payload.floor;
+      if (newFloor) {
+        return { ...state, floor: newFloor };
+      }
     }
     default:
       return state;
   }
 };
 
-function TwoSlotDisplay(props) {
+function TwoSlotDisplay(props: { schedule: EmptySchedule }) {
   const [chillPlaceDetails, dispatchChillPlaceDetails] = useReducer(
-    chillPlaceDetailsReducer,
+    reducer,
     getInitialChillPlaceDetails()
   );
 
@@ -50,7 +73,7 @@ function TwoSlotDisplay(props) {
             onChange={(event) => {
               let newDay = parseInt(event.target.value, 10);
               dispatchChillPlaceDetails({
-                type: CHILLPLACE_DISPATCH_TYPES.CHANGE_DAY,
+                type: DISPATCH_TYPES.CHANGE_DAY,
                 payload: { day: newDay },
               });
             }}
@@ -64,7 +87,7 @@ function TwoSlotDisplay(props) {
             onChange={(event) => {
               let newSlot = parseInt(event.target.value, 10);
               dispatchChillPlaceDetails({
-                type: CHILLPLACE_DISPATCH_TYPES.CHANGE_SLOT,
+                type: DISPATCH_TYPES.CHANGE_SLOT,
                 payload: { slot: newSlot },
               });
             }}
@@ -77,9 +100,9 @@ function TwoSlotDisplay(props) {
             value={chillPlaceDetails.complex}
             onChange={(event) => {
               dispatchChillPlaceDetails({
-                type: CHILLPLACE_DISPATCH_TYPES.CHANGE_COMPLEX,
+                type: DISPATCH_TYPES.CHANGE_COMPLEX,
                 payload: {
-                  complex: event.target.value,
+                  complex: event.target.value as Complex,
                 },
               });
             }}
@@ -92,9 +115,9 @@ function TwoSlotDisplay(props) {
             value={chillPlaceDetails.floor}
             onChange={(event) => {
               dispatchChillPlaceDetails({
-                type: CHILLPLACE_DISPATCH_TYPES.CHANGE_FLOOR,
+                type: DISPATCH_TYPES.CHANGE_FLOOR,
                 payload: {
-                  floor: event.target.value,
+                  floor: event.target.value as Floor,
                 },
               });
             }}
@@ -135,9 +158,5 @@ function TwoSlotDisplay(props) {
     </div>
   );
 }
-
-TwoSlotDisplay.propTypes = {
-  schedule: PropTypes.array.isRequired,
-};
 
 export default TwoSlotDisplay;
