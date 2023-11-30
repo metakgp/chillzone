@@ -1,7 +1,10 @@
 import { HourSlotMap, NETWORK_CHECK_URL } from "../constants/constants";
-import { ChillPlace, ChillPlaceDetails, Complex, Floor } from "../lib/types";
+import { Classroom, Complex, Floor } from "../lib/types";
 
-export function getNextSlot(day: number, slot: number) {
+export function getNextSlot(
+  day: number,
+  slot: number
+): { day: number; slot: number } {
   let next_day = day;
   if (slot === 8) {
     next_day = (day + 1) % 5;
@@ -13,7 +16,10 @@ export function getNextSlot(day: number, slot: number) {
   };
 }
 
-export function getPrevSlot(day: number, slot: number) {
+export function getPrevSlot(
+  day: number,
+  slot: number
+): { day: number; slot: number } {
   let prev_day = day;
   if (slot === 0) {
     prev_day = (day - 1) % 5;
@@ -25,7 +31,7 @@ export function getPrevSlot(day: number, slot: number) {
   };
 }
 
-export function getInitialChillPlaceDetails(): ChillPlaceDetails {
+export function getInitialChillzoneDetails(): Classroom {
   let slot = 0,
     today = new Date(),
     complex: Complex = "Any",
@@ -43,18 +49,10 @@ export function getInitialChillPlaceDetails(): ChillPlaceDetails {
       day = (day + 1) % 9;
     }
   }
-
-  // if (slot === undefined) {
-  //   let hour = today.getHours();
-  //   slot = 0;
-  //   if (hour >= 18) {
-  //     day = (day + 1) % 9;
-  //   }
-  // }
   return { day, slot, complex, floor, isWeekend };
 }
 
-export async function isInsideCampusNetwork() {
+export async function isInsideCampusNetwork(): Promise<boolean> {
   const TIMEOUT = 3000;
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), TIMEOUT);

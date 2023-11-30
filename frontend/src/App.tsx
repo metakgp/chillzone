@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+
+import schedule from "./data/schedule.json";
+import emptySchedule from "./data/empty_schedule.json";
+
 import CustomTable from "./components/CustomTable";
 import EmptyRoomsTable from "./components/EmptyRoomsTable";
 import Logo from "./navbar-icon.svg";
 import TwoSlotDisplay from "./components/TwoSlotDisplay";
+
 import { isInsideCampusNetwork } from "./util/utilities";
 import { EmptySchedule, Schedule } from "./lib/types";
 
@@ -12,7 +17,7 @@ type AppProps = {
   emptySchedule: EmptySchedule;
 };
 
-function App({ schedule, emptySchedule }: AppProps) {
+function App() {
   const [loading, setLoading] = useState<boolean>(true);
   const [show, setShow] = useState<boolean>(false);
 

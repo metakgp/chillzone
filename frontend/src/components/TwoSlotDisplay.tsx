@@ -7,11 +7,11 @@ import {
   Floors,
   DISPATCH_TYPES,
 } from "../constants/constants";
-import { getNextSlot, getInitialChillPlaceDetails } from "../util/utilities";
+import { getNextSlot, getInitialChillzoneDetails } from "../util/utilities";
 import {
   EmptySchedule,
-  ChillPlaceAction,
-  ChillPlaceDetails,
+  ClassroomAction,
+  Classroom,
   ChangeDayAction,
   ChangeSlotAction,
   ChangeComplexAction,
@@ -20,7 +20,7 @@ import {
   Floor,
 } from "../lib/types";
 
-const reducer = (state: ChillPlaceDetails, action: ChillPlaceAction) => {
+const reducer = (state: Classroom, action: ClassroomAction) => {
   switch (action.type) {
     case DISPATCH_TYPES.CHANGE_DAY:
       const newDay = (action as ChangeDayAction).payload.day;
@@ -54,25 +54,25 @@ const reducer = (state: ChillPlaceDetails, action: ChillPlaceAction) => {
 };
 
 function TwoSlotDisplay(props: { schedule: EmptySchedule }) {
-  const [chillPlaceDetails, dispatchChillPlaceDetails] = useReducer(
+  const [chillzoneDetails, dispatchChillzoneDetails] = useReducer(
     reducer,
-    getInitialChillPlaceDetails()
+    getInitialChillzoneDetails()
   );
 
-  let next = getNextSlot(chillPlaceDetails.day, chillPlaceDetails.slot);
+  let next = getNextSlot(chillzoneDetails.day, chillzoneDetails.slot);
   return (
     <div className="container">
       <h3>Choose the slot, area and floor that you want to chill at:</h3>
-      {chillPlaceDetails.isWeekend && (
+      {chillzoneDetails.isWeekend && (
         <h5>PS: You shouldn't be attending classes on weekends! :P</h5>
       )}
       <div className="row">
         <div className="col-md-12">
           <select
-            value={chillPlaceDetails.day}
+            value={chillzoneDetails.day}
             onChange={(event) => {
               let newDay = parseInt(event.target.value, 10);
-              dispatchChillPlaceDetails({
+              dispatchChillzoneDetails({
                 type: DISPATCH_TYPES.CHANGE_DAY,
                 payload: { day: newDay },
               });
@@ -83,10 +83,10 @@ function TwoSlotDisplay(props: { schedule: EmptySchedule }) {
             ))}
           </select>
           <select
-            value={chillPlaceDetails.slot}
+            value={chillzoneDetails.slot}
             onChange={(event) => {
               let newSlot = parseInt(event.target.value, 10);
-              dispatchChillPlaceDetails({
+              dispatchChillzoneDetails({
                 type: DISPATCH_TYPES.CHANGE_SLOT,
                 payload: { slot: newSlot },
               });
@@ -97,9 +97,9 @@ function TwoSlotDisplay(props: { schedule: EmptySchedule }) {
             ))}
           </select>
           <select
-            value={chillPlaceDetails.complex}
+            value={chillzoneDetails.complex}
             onChange={(event) => {
-              dispatchChillPlaceDetails({
+              dispatchChillzoneDetails({
                 type: DISPATCH_TYPES.CHANGE_COMPLEX,
                 payload: {
                   complex: event.target.value as Complex,
@@ -112,9 +112,9 @@ function TwoSlotDisplay(props: { schedule: EmptySchedule }) {
             ))}
           </select>
           <select
-            value={chillPlaceDetails.floor}
+            value={chillzoneDetails.floor}
             onChange={(event) => {
-              dispatchChillPlaceDetails({
+              dispatchChillzoneDetails({
                 type: DISPATCH_TYPES.CHANGE_FLOOR,
                 payload: {
                   floor: event.target.value as Floor,
@@ -137,10 +137,10 @@ function TwoSlotDisplay(props: { schedule: EmptySchedule }) {
         <div className="col-md-6">
           <EmptyRooms
             schedule={props.schedule}
-            day={chillPlaceDetails.day}
-            slot={chillPlaceDetails.slot}
-            complex={chillPlaceDetails.complex}
-            floor={chillPlaceDetails.floor}
+            day={chillzoneDetails.day}
+            slot={chillzoneDetails.slot}
+            complex={chillzoneDetails.complex}
+            floor={chillzoneDetails.floor}
             show_common_next={true}
           />
         </div>
@@ -149,8 +149,8 @@ function TwoSlotDisplay(props: { schedule: EmptySchedule }) {
             schedule={props.schedule}
             day={next.day}
             slot={next.slot}
-            complex={chillPlaceDetails.complex}
-            floor={chillPlaceDetails.floor}
+            complex={chillzoneDetails.complex}
+            floor={chillzoneDetails.floor}
             show_common_next={true}
           />
         </div>

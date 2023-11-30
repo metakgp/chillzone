@@ -11,14 +11,11 @@ export type EmptySchedule = typeof emptySchedule;
 export type Complex = "Any" | "NC" | "NR" | "Vikramshila";
 export type Floor = "Any" | "1" | "2" | "3" | "4";
 
-export type ChillPlace = {
+export type Classroom = {
   day: number;
   slot: number;
   floor: Floor;
   complex: Complex;
-};
-
-export type ChillPlaceDetails = ChillPlace & {
   isWeekend: boolean;
 };
 
@@ -50,7 +47,7 @@ export type ChangeComplexAction = {
   };
 };
 
-export type ChillPlaceAction =
+export type ClassroomAction =
   | ChangeDayAction
   | ChangeComplexAction
   | ChangeFloorAction
