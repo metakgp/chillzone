@@ -1,15 +1,15 @@
 package main
 
 import (
-	"io/ioutil"
 	"log"
+	"os"
 	"strings"
 )
 
 func build_slots() map[string][][2]int {
 	ret := make(map[string][][2]int)
 
-	b, err := ioutil.ReadFile("slots.1")
+	b, err := os.ReadFile("slots.1")
 	if err != nil {
 		log.Fatal("Could not read the slots file from disk: ", err)
 	}
