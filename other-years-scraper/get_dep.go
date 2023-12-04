@@ -1,14 +1,16 @@
 package main
 
-import "net/http"
-import "net/http/httputil"
-import "net/url"
-import "io/ioutil"
-import "log"
-import "os"
-import "fmt"
+import (
+	"fmt"
+	"io"
+	"log"
+	"net/http"
+	"net/http/httputil"
+	"net/url"
+	"os"
+)
 
-func dep_timetable(dep string) string {
+func dep_timetable(dep string, client *http.Client) string {
 
 	log.Print("Starting request for department ", dep)
 
@@ -31,9 +33,7 @@ func dep_timetable(dep string) string {
 	req.Header.Add("User-Agent", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:61.0) Gecko/20100101 Firefox/61.0")
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 
-	req.Header.Add("Cookie", "JSESSIONID="+os.Getenv("JSESSIONID"))
-
-	client := &http.Client{}
+	// req.Header.Add("Cookie", "JSESSIONID="+os.Getenv("JSESSIONID"))
 
 	if InDebugMode() {
 		requestDump, err := httputil.DumpRequest(req, true)
@@ -51,7 +51,7 @@ func dep_timetable(dep string) string {
 
 	defer resp.Body.Close()
 
-	body, _ := ioutil.ReadAll(resp.Body)
+	body, _ := io.ReadAll(resp.Body)
 	log.Printf("Request completed. Returning response now. Response length: %d", len(string(body)))
 
 	return string(body)
