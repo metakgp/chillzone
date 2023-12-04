@@ -33,8 +33,6 @@ func dep_timetable(dep string, client *http.Client) string {
 	req.Header.Add("User-Agent", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:61.0) Gecko/20100101 Firefox/61.0")
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 
-	// req.Header.Add("Cookie", "JSESSIONID="+os.Getenv("JSESSIONID"))
-
 	if InDebugMode() {
 		requestDump, err := httputil.DumpRequest(req, true)
 		if err != nil {
