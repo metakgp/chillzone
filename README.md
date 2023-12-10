@@ -21,7 +21,7 @@
   <h1 align="center">Chillzone</h1>
 
   <p align="center">
-    <i>Will find you a chillzone inside IIT KGP at any time</i>
+    <i>Will find you a chillzone inside IIT KGP at any time.</i>
     <br />
     <a href="https://chill.metakgp.org">Website</a>
     ·
@@ -49,10 +49,10 @@
 
 ## Local Installation
 
-To run Chillzone front-end on your local system
+To run Chillzone front-end on your local system.
 
 1. Make sure you have `pnpm` installed on your system. Installation instructions can be found [here](https://pnpm.io/installation).
-2. Clone the repo and change directory
+2. Clone the repo and change directory.
 
    ```
    git clone https://github.com/metakgp/chillzone
@@ -60,13 +60,13 @@ To run Chillzone front-end on your local system
    cd chillzone/frontend
    ```
 
-3. Install modules and launch frontend
+3. Install modules and launch frontend.
    ```
    pnpm install
    pnpm start
    ```
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">(<a href="#top">Back to top</a>)</p>
 
 <!--
 ## How does it work?
@@ -88,7 +88,7 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
 > **Note**: First year timetable needs to be updated at the start of a new session only.
 
 1. Download first year timetable from ERP and place it in the `first-year-scraper/` directory.
-2. Install dependencies
+2. Install dependencies.
 
    ```
    cd first-year-scraper
@@ -100,29 +100,29 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
 
 #### Getting a valid `JSESSIONID`
 
-1. Login to the ERP
-2. Go to Academic -> Timetable -> Subject List with Timetable Slots
-3. Open the browser console. Switch to the Network tab [Windows: `ctrl + shift + j` - macOS: `cmd + shift + c`]
-4. Choose any department and wait for the time table to load
+1. Login to the ERP.
+2. Go to Academic -> Timetable -> Subject List with Timetable Slots.
+3. Open the browser console. Switch to the Network tab. [Windows: `ctrl + shift + j` - macOS: `cmd + shift + c`]
+4. Choose any department and wait for the time table to load.
 5. After the time table is loaded, check the Network tab for the `POST timetable_track.js ...` request. Select this request; switch to the Cookies tab and copy the `JSESSIONID` cookie value.
 
 #### Updating `.env` file
 
-> **Note**: Use `.env.template` file as the base for `.env` file
+> **Note**: Use `.env.template` file as the base for `.env` file.
 
 1. Update the `JSESSIONID` environment variable with the copied value.
 2. Update the `SESSION` and `SEMESTER` environment variables.
 
 > **Note:** In case you are unable to scrape the new semester's timetable, then, these steps will help you find the problem:
 >
-> 1. Turn on `DEBUG` inside the `.env` file by setting it to `"1"`
+> 1. Turn on `DEBUG` inside the `.env` file by setting it to `"1"`.
 > 2. Reduce the size of the departments array to 2 so that you are not buried with output in the terminal.
 
 ### Final steps
 
-1. Run `update_data.sh`
+1. Run `update_data.sh`.
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">(<a href="#top">Back to top</a>)</p>
 
 ## Meanings of the various files
 
@@ -165,13 +165,13 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
   webpage. It is a JSON file where the keys are subject codes and the values are
   strings with this structure: `<SUBJECT NAME> - <PROFESSOR NAMES>`.
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">(<a href="#top">Back to top</a>)</p>
 
 ## Maintainer(s)
 
 - [Chirag Ghosh](https://github.com/chirag-ghosh)
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">(<a href="#top">Back to top</a>)</p>
 
 ## Contact
 
@@ -197,7 +197,7 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
 </a>
 </p>
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">(<a href="#top">Back to top</a>)</p>
 
 ## Additional documentation
 
@@ -206,7 +206,7 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
 - [Security Policy](/.github/SECURITY.md)
 - [Contribution Guidelines](/.github/CONTRIBUTING.md)
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">(<a href="#top">Back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
