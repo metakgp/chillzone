@@ -47,3 +47,10 @@ export const Floors = {
   3: "3",
   4: "4",
 };
+
+export const DISPATCH_TYPES = {
+  CHANGE_DAY: "CHANGE_DAY",
+  CHANGE_SLOT: "CHANGE_SLOT",
+  CHANGE_COMPLEX: "CHANGE_COMPLEX",
+  CHANGE_FLOOR: "CHANGE_FLOOR",
+} as const;
