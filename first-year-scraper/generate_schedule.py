@@ -26,9 +26,12 @@ def generate_schedule(valid_sheets, workbook, subjects_dict):
         if(worksheet['N4'].value is not None or worksheet['M4'].value is None):
             print("parsing error in sheet {}".format(sheet))
 
-            # for aut2023.pdf only page 5 has parsing error in which one column is repeated.
-            # manually deleting that column:
-            worksheet.delete_cols(7,1)
+            # for spring24.pdf pages 9, 15 have parsing error in which one column is repeated in each.
+            # manually deleting those columns:
+            if sheet=="page-9-table-1":
+                worksheet.delete_cols(10,1)
+            if sheet=="page-15-table-1":
+                worksheet.delete_cols(6,1)
         
         worksheet.delete_cols(9,1)
         for i in range(0, 6):
