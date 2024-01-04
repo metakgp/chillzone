@@ -36,12 +36,12 @@
 - [Updation for a new semester](#updation-for-a-new-semester)
   - [For First Year Timetable](#for-first-year-timetable)
   - [For Second Year and above Timetable](#for-second-year-and-above-timetable)
-    - [Getting a valid `JSESSIONID`](#getting-a-valid-jsessionid)
     - [Updating `.env` file](#updating-env-file)
   - [Final steps](#final-steps)
 - [Meanings of the various files](#meanings-of-the-various-files)
   - [Input Files](#input-files)
   - [Output Files](#output-files)
+- [Development Notes](#development-notes)
 - [Maintainer(s)](#maintainers)
 - [Contact](#contact)
 - [Additional documentation](#additional-documentation)
@@ -98,20 +98,11 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
 
 ### For Second Year and above Timetable
 
-#### Getting a valid `JSESSIONID`
-
-1. Login to the ERP.
-2. Go to Academic -> Timetable -> Subject List with Timetable Slots.
-3. Open the browser console. Switch to the Network tab. [Windows: `ctrl + shift + j` - macOS: `cmd + shift + c`]
-4. Choose any department and wait for the time table to load.
-5. After the time table is loaded, check the Network tab for the `POST timetable_track.js ...` request. Select this request; switch to the Cookies tab and copy the `JSESSIONID` cookie value.
-
 #### Updating `.env` file
 
 > **Note**: Use `.env.template` file as the base for `.env` file.
 
-1. Update the `JSESSIONID` environment variable with the copied value.
-2. Update the `SESSION` and `SEMESTER` environment variables.
+Update the `SESSION` and `SEMESTER` environment variables.
 
 > **Note:** In case you are unable to scrape the new semester's timetable, then, these steps will help you find the problem:
 >
@@ -166,6 +157,11 @@ curl 'https://erp.iitkgp.ernet.in/Acad/timetable_track.jsp?action=second&dept=AE
   strings with this structure: `<SUBJECT NAME> - <PROFESSOR NAMES>`.
 
 <p align="right">(<a href="#top">Back to top</a>)</p>
+
+## Development Notes
+This package utilizes [iitkgp-erp-login-go](https://github.com/metakgp/iitkgp-erp-login-go) package to handle ERP login functionality and fetch timetables.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Maintainer(s)
 

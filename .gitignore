@@ -8,4 +8,5 @@ frontend/node_modules/
 frontend/coverage/
 frontend/build/
 __pycache__/
-other-years-scraper/other-years-scraper
+other-years-scraper/main
+other-years-scraper/vendor/
