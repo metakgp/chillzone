@@ -18,7 +18,7 @@ class TwoSlotDisplay extends Component {
       let hour = today.getHours();
       slot = 0;
       if (hour >= 18) {
-        day = (day + 1) % 9;
+        day = (day + 1) % 5;
       }
     }
 
@@ -89,7 +89,8 @@ class TwoSlotDisplay extends Component {
         <div className="row">
           <div className="col-md-12">
             <i>
-              Rooms in BOLD are free for the next slot as well
+              Rooms in <b>BOLD</b> are free for the next slot as well<br/>
+              Rooms in <b className='yellowText'>YELLOW</b> are empty all day. They may be locked.<br/>
             </i>
           </div>
         </div>

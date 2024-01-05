@@ -24,6 +24,38 @@ export function getPrevSlot(day, slot) {
   };
 }
 
+
+// returns list of rooms that are empty the entire day
+export function emptyAllDay(daySchedule) {
+  var result = [];
+
+  //intersects all the slots of a daySchedule
+  //so only the rooms that are present in all slots get added to the "result" list 
+  for(var i = 0; i < daySchedule.length; i++) {
+    var slot = daySchedule[i]; 
+    for(var y = 0; y < slot.length; y++) {
+      var room = slot[y];
+      if(result.indexOf(room) === -1) {
+
+        //check if room exists in all slots & store in flag "emptyInAll"
+        var emptyInAll = true;
+        for(var x = 0; x < daySchedule.length; x++) {
+          if(daySchedule[x].indexOf(room) === -1) {
+            emptyInAll = false;
+            break;
+          }
+        }
+
+        if (emptyInAll) { 
+          result.push(room);
+        }
+
+      }
+    }
+  }
+  return result;
+}
+
 export async function isInsideCampusNetwork() {
   const TIMEOUT = 3000;
   const controller = new AbortController();
