@@ -166,6 +166,7 @@ This package utilizes [iitkgp-erp-login-go](https://github.com/metakgp/iitkgp-er
 ## Maintainer(s)
 
 - [Chirag Ghosh](https://github.com/chirag-ghosh)
+- [Shikhar Soni](https://github.com/shikharish)
 
 <p align="right">(<a href="#top">Back to top</a>)</p>
 
