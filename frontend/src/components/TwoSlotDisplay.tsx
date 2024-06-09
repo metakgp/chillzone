@@ -130,8 +130,10 @@ function TwoSlotDisplay(props: { schedule: EmptySchedule }) {
       </div>
       <div className="row">
         <div className="col-md-12">
-          <i>Rooms in BOLD are free for the next slot as well</i>
-          Rooms in <b className='yellowText'>YELLOW</b> are empty all day. They may be locked.<br/>
+          <i>
+            Rooms in BOLD are free for the next slot as well<br/>
+            Rooms in <b className='yellowText'>YELLOW</b> are empty all day. They may be locked.<br/>
+          </i>
         </div>
       </div>
       <div className="row">
