@@ -23,7 +23,7 @@ jobs:
 
     - name: Install pnpm
       run: |
-        cd frontend;
+        cd frontend
         npm install -g pnpm
 
     - name: Cache pnpm store
