@@ -46,6 +46,6 @@ jobs:
         path: ./frontend/build/
 
     - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: ./frontend/build
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: ./frontend/build
