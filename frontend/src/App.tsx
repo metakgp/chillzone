@@ -10,12 +10,7 @@ import Logo from "./navbar-icon.svg";
 import TwoSlotDisplay from "./components/TwoSlotDisplay";
 
 import { isInsideCampusNetwork } from "./util/utilities";
-import { EmptySchedule, Schedule } from "./lib/types";
-
-type AppProps = {
-  schedule: Schedule;
-  emptySchedule: EmptySchedule;
-};
+import { Schedule } from "./lib/types";
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
