@@ -40,8 +40,8 @@ jobs:
     - name: Download Artifacts
       id: download-artifact
       uses: dawidd6/action-download-artifact@v5
-      workflow: build-ci-test.yaml
       with:
+        workflow: build-ci-test.yaml
         github_token: ${{secrets.GITHUB_TOKEN}}
         path: ./frontend/build/
 
