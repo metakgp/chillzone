@@ -30,13 +30,13 @@ def generate_subjectDetails():
                     get_cell_value(5, i+4).upper()+" TUTORIAL",
                 ]
 
-    with open("../frontend/src/subjectDetails.json", "r") as json_data:
+    with open("../frontend/src/data/subjectDetails.json", "r") as json_data:
         subject_details = json.load(json_data)
     
     for key in subjects_dict.keys():
         subject_details[subjects_dict[key][0]] = subjects_dict[key][1]
 
-    with open("../frontend/src/subjectDetails.json", "w") as outfile:
+    with open("../frontend/src/data/subjectDetails.json", "w") as outfile:
         json.dump(subject_details, outfile, indent=2)
 
     return subjects_dict

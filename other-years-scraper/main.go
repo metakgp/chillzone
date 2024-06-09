@@ -93,7 +93,7 @@ func main() {
 	if err != nil {
 		log.Fatal("Could not marshal subjectDetails to JSON: ", err)
 	}
-	err = os.WriteFile("../frontend/src/subjectDetails.json", b, 0644)
+	err = os.WriteFile("../frontend/src/data/subjectDetails.json", b, 0644)
 	if err != nil {
 		log.Fatal("Could not write to subjectDetails.json: ", err)
 	}
@@ -143,7 +143,7 @@ func main() {
 	if err != nil {
 		log.Fatal("Could not marshal schedule to JSON: ", err)
 	}
-	err = os.WriteFile("../frontend/src/schedule.json", b, 0644)
+	err = os.WriteFile("../frontend/src/data/schedule.json", b, 0644)
 	if err != nil {
 		log.Fatal("Could not write to schedule.json: ", err)
 	}
@@ -153,7 +153,7 @@ func main() {
 	if err != nil {
 		log.Fatal("Couldn't convert empty schedule to JSON: ", err)
 	}
-	err = os.WriteFile("../frontend/src/empty_schedule.json", b, 0644)
+	err = os.WriteFile("../frontend/src/data/empty_schedule.json", b, 0644)
 	if err != nil {
 		log.Fatal("Couldn't write the empty schedule JSON to file: ", err)
 	}
