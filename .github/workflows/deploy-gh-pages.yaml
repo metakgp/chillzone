@@ -38,8 +38,11 @@ jobs:
         pnpm install
     
     - name: Download Artifacts
-      uses: actions/download-artifact@v4
+      id: download-artifact
+      uses: dawidd6/action-download-artifact@v5
+      workflow: build-ci-test.yaml
       with:
+        github_token: ${{secrets.GITHUB_TOKEN}}
         path: ./frontend/build/
 
     - name: Push to deployment
