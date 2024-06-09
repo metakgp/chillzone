@@ -21,5 +21,5 @@ jobs:
 
     - name: Push to deployment
       run: |
-      cd frontend
-      pnpm run deploy
+         cd frontend
+         pnpm run deploy
