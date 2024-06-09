@@ -1,4 +1,4 @@
-name: Build and Cache Node.js Application
+name: Deploy to Github Pages
 
 on:
   push:
