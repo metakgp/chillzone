@@ -37,16 +37,18 @@ export function CustomTable(props: CustomTableProps) {
 }
 
 export function CustomTableRow(props: CustomTableRowProps) {
-  const getTextToDisplay = (k: keyof SubjectDetails | "") => {
-    if (k === "") {
+  const getTextToDisplay = (k: string) => {
+    if (!subjectDetails.hasOwnProperty(k)) {
       return <b>EMPTY</b>;
     } else {
-      <OverlayTrigger
-        overlay={<Tooltip id="tooltip-id">{subjectDetails[k]}</Tooltip>}
-        placement="top"
-      >
-        <span>{k}</span>
-      </OverlayTrigger>;
+      return(
+        <OverlayTrigger
+          overlay={<Tooltip id="tooltip-id">{subjectDetails[k as keyof SubjectDetails]}</Tooltip>}
+          placement="top"
+        >
+          <span>{k}</span>
+        </OverlayTrigger>
+      );
     }
   };
 
@@ -60,13 +62,11 @@ export function CustomTableRow(props: CustomTableRowProps) {
         <b>{DayNames[props.day]}</b>
       </td>
       {props.schedule.map((k: string) => {
-        if (subjectDetails.hasOwnProperty(k)) {
-          return (
-            <td className={getAlertLevel(k)}>
-              {getTextToDisplay(k as keyof SubjectDetails)}
-            </td>
-          );
-        }
+        return (
+          <td className={getAlertLevel(k)}>
+            {getTextToDisplay(k)}
+          </td>
+        );
       })}
     </tr>
   );
