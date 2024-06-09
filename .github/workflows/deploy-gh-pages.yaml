@@ -43,7 +43,7 @@ jobs:
       with:
         workflow: build-ci-test.yaml
         github_token: ${{secrets.GITHUB_TOKEN}}
-        path: ./frontend/build/
+        path: ./frontend/build
 
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@v4
