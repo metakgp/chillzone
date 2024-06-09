@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import CustomTable from "./CustomTable.js";
 import PropTypes from "prop-types";
