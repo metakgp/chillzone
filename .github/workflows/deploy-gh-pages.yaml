@@ -1,0 +1,25 @@
+name: Deploy to Github Pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Download Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: build
+        path: ./frontend/build/
+
+    - name: Push to deployment
+      run: |
+         cd frontend
+         pnpm run deploy
