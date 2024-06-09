@@ -23,14 +23,14 @@ function App({ schedule, empty_schedule }) {
   if (loading)
     return (
       <div className="message-banner">
-        <iframe src="https://lottie.host/?file=ca9a3787-e6db-4878-a0d3-d10dde95b225/MjnHw4B5gw.json"></iframe>
+        <iframe src="https://lottie.host/?file=ca9a3787-e6db-4878-a0d3-d10dde95b225/MjnHw4B5gw.json" title="cat-1"></iframe>
         <div className="message">Chillzone is loading</div>
       </div>
     );
   else if (!show)
     return (
       <div className="message-banner">
-        <iframe src="https://lottie.host/?file=46b58d32-043e-4268-94cd-4d7817565000/xNnhIYFoYA.json"></iframe>
+        <iframe src="https://lottie.host/?file=46b58d32-043e-4268-94cd-4d7817565000/xNnhIYFoYA.json" title="cat-2"></iframe>
         <div className="message">
           Please connect to IIT Kharagpur campus network to access this site!
         </div>
