@@ -1,0 +1,27 @@
+name: Build and Cache Node.js Application
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Download Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: build
+        path: ./build
+
+    - name: Push to deployment
+      uses: EndBug/add-and-commit@v9
+      with:
+        add: ./build
+        default_author: user_info
+        message: 'Updates'
