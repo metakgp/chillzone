@@ -6,19 +6,20 @@ on:
       - master
 
 jobs:
-  deploy:
-
-    permissions:
-      pages: write
-      id-token: write
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-      
+  build:
     runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
 
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Download Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: build
+        path: ./frontend/build/
+
+    - name: Push to deployment
+      run: |
+      cd frontend
+      pnpm run deploy
