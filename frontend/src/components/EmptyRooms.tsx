@@ -3,7 +3,7 @@ import { Table } from "react-bootstrap";
 import { DayNames, Slots, Complexes, Floors } from "../constants/constants";
 import chunk from "lodash.chunk";
 import intersection from "lodash.intersection";
-import { getNextSlot, getPrevSlot } from "../util/utilities";
+import { emptyAllDay, getNextSlot, getPrevSlot } from "../util/utilities";
 import { Complex, Floor } from "../lib/types";
 
 type EmptyRoomsProps = {
@@ -62,6 +62,9 @@ function EmptyRooms(props: EmptyRoomsProps) {
 
   let common_rooms: string[] = [];
 
+  //list of all rooms that are empty in all slots for the day
+  let empty_all_day = emptyAllDay(props.schedule[day])
+
   if (props.show_common_next) {
     let next = getNextSlot(day, slot);
     let next_day = next.day;
@@ -92,11 +95,15 @@ function EmptyRooms(props: EmptyRoomsProps) {
           {schedule_chunked.map((val) => (
             <tr>
               {val.map((room) => {
-                let default_text: React.ReactNode | string = room;
-                if (common_rooms.indexOf(room) >= 0) {
-                  default_text = <b>{room}</b>;
-                }
-                return <td>{default_text}</td>;
+                return (
+                  <td 
+                    className={
+                      (common_rooms.includes(room) ? "bold " : "") +
+                      (empty_all_day.includes(room) ? "yellowWarn" : "")
+                    }>
+                    {room}
+                  </td>
+                )
               })}
             </tr>
           ))}

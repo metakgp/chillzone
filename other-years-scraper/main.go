@@ -3,11 +3,11 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 
 	"github.com/joho/godotenv"
+	erp "github.com/metakgp/iitkgp-erp-login-go"
 )
 
 func add_subject(
@@ -49,16 +49,18 @@ func main() {
 	if err != nil {
 		log.Fatal("Couldn't read department data: ", err)
 	}
-	log.Print(departments)
 
 	allSubjects := make(map[string][][]string)
 
 	accumulate_channel := make(chan ParsedResult)
 
+	log.Println("ERP Authentication is needed to fetch timetables!")
+	client, _ := erp.ERPSession()
+
 	for _, v := range departments {
 		dep := v.Code
 		go func() {
-			dep_html := dep_timetable(dep)
+			dep_html := dep_timetable(dep, client)
 			t := parse_html(dep_html)
 			log.Printf("Found %d subjects in department %s", len(t), dep)
 			accumulate_channel <- ParsedResult{t, dep}
@@ -91,7 +93,7 @@ func main() {
 	if err != nil {
 		log.Fatal("Could not marshal subjectDetails to JSON: ", err)
 	}
-	err = ioutil.WriteFile("../frontend/src/data/subjectDetails.json", b, 0644)
+	err = os.WriteFile("../frontend/src/data/subjectDetails.json", b, 0644)
 	if err != nil {
 		log.Fatal("Could not write to subjectDetails.json: ", err)
 	}
@@ -111,7 +113,7 @@ func main() {
 	problems := []Combined{}
 	_, err = os.Stat("problems.json")
 	if err == nil {
-		b, err = ioutil.ReadFile("problems.json")
+		b, err = os.ReadFile("problems.json")
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -141,7 +143,7 @@ func main() {
 	if err != nil {
 		log.Fatal("Could not marshal schedule to JSON: ", err)
 	}
-	err = ioutil.WriteFile("../frontend/src/data/schedule.json", b, 0644)
+	err = os.WriteFile("../frontend/src/data/schedule.json", b, 0644)
 	if err != nil {
 		log.Fatal("Could not write to schedule.json: ", err)
 	}
@@ -151,7 +153,7 @@ func main() {
 	if err != nil {
 		log.Fatal("Couldn't convert empty schedule to JSON: ", err)
 	}
-	err = ioutil.WriteFile("../frontend/src/data/empty_schedule.json", b, 0644)
+	err = os.WriteFile("../frontend/src/data/empty_schedule.json", b, 0644)
 	if err != nil {
 		log.Fatal("Couldn't write the empty schedule JSON to file: ", err)
 	}
