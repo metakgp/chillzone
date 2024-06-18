@@ -1,5 +1,4 @@
-export const NETWORK_CHECK_URL = "https://heimdall.metakgp.org";
-
+export const NETWORK_CHECK_URL = "https://heimdall-api.metakgp.org/campus-check";
 export const Slots = [
   "8 am",
   "9 am ",
