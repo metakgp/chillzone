@@ -39,7 +39,7 @@ jobs:
     
     - name: Download Artifacts
       id: download-artifact
-      uses: dawidd6/action-download-artifact@v5
+      uses: dawidd6/action-download-artifact@v6
       with:
         workflow: build-ci-test.yaml
         github_token: ${{secrets.GITHUB_TOKEN}}
