@@ -24,7 +24,7 @@ const reducer = (state: Classroom, action: ClassroomAction) => {
   switch (action.type) {
     case DISPATCH_TYPES.CHANGE_DAY:
       const newDay = (action as ChangeDayAction).payload.day;
-      if (newDay) {
+      if (newDay !== undefined && newDay !== null) {
         return {
           ...state,
           day: newDay,
@@ -32,7 +32,7 @@ const reducer = (state: Classroom, action: ClassroomAction) => {
       }
     case DISPATCH_TYPES.CHANGE_SLOT: {
       const newSlot = (action as ChangeSlotAction).payload.slot;
-      if (newSlot) {
+      if (newSlot !== undefined && newSlot !== null) {
         return { ...state, slot: newSlot };
       }
     }
@@ -131,8 +131,11 @@ function TwoSlotDisplay(props: { schedule: EmptySchedule }) {
       <div className="row">
         <div className="col-md-12">
           <i>
-            Rooms in BOLD are free for the next slot as well<br/>
-            Rooms in <b className='yellowText'>YELLOW</b> are empty all day. They may be locked.<br/>
+            Rooms in BOLD are free for the next slot as well
+            <br />
+            Rooms in <b className="yellowText">YELLOW</b> are empty all day.
+            They may be locked.
+            <br />
           </i>
         </div>
       </div>

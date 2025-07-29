@@ -1,5 +1,0 @@
-camelot-py>=0.11.0
-opencv-python
-ghostscript
-numpy<=1.23.5
-pandas<=1.0.5

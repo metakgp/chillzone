@@ -9,27 +9,27 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.1",
     "react-dom": "^18.2.0",
-    "react-scripts": "^5.0.1",
     "react-table": "^7.8.0",
     "save-dev": "0.0.1-security"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "deploy": "gh-pages -d build",
-    "eject": "react-scripts eject",
     "heroku-prebuild": "npm install -g serve"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.10",
     "@types/lodash.chunk": "^4.2.9",
     "@types/lodash.intersection": "^4.4.9",
-    "@types/jest": "^29.5.10",
     "@types/node": "^20.10.0",
     "@types/react": "^18.2.38",
     "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.7.0",
     "gh-pages": "^3.1.0",
-    "typescript": "^5.3.2"
+    "typescript": "^5.3.2",
+    "vite": "^7.0.6"
   },
   "browserslist": {
     "production": [
