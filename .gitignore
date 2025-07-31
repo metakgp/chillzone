@@ -10,3 +10,4 @@ frontend/dist/
 __pycache__/
 scraper/main
 scraper/vendor/
+.session
