@@ -4,7 +4,7 @@ go 1.21.4
 
 require (
 	github.com/joho/godotenv v1.5.1
-	github.com/metakgp/iitkgp-erp-login-go v1.0.0
+	github.com/metakgp/iitkgp-erp-login-go v1.0.2
 	golang.org/x/net v0.19.0
 )
 
