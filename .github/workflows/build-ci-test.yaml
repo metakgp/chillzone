@@ -45,10 +45,3 @@ jobs:
         cd frontend
         pnpm run build
 
-    - name: Save build artifacts
-      if: success()
-      uses: actions/upload-artifact@v4
-      with:
-        name: build
-        path: ./frontend/dist
-
