@@ -5,7 +5,6 @@ import schedule from "./data/schedule.json";
 import emptySchedule from "./data/empty_schedule.json";
 
 import CustomTable from "./components/CustomTable";
-import EmptyRoomsTable from "./components/EmptyRoomsTable";
 import Logo from "./navbar-icon.svg";
 import TwoSlotDisplay from "./components/TwoSlotDisplay";
 
@@ -17,6 +16,17 @@ function App() {
   const [show, setShow] = useState<boolean>(false);
 
   useEffect(() => {
+    const bypass =
+      import.meta.env.VITE_BYPASS_NETWORK_CHECK === "1" ||
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1";
+
+    if (bypass) {
+      setShow(true);
+      setLoading(false);
+      return;
+    }
+
     isInsideCampusNetwork()
       .then((value: boolean) => {
         setShow(value);
@@ -57,7 +67,6 @@ function App() {
 
       <TwoSlotDisplay schedule={emptySchedule} />
 
-      <EmptyRoomsTable schedule={emptySchedule} />
       {Object.keys(schedule).map((key: string) => {
         return (
           <CustomTable room={key} schedule={schedule[key as keyof Schedule]} />
