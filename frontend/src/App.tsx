@@ -5,6 +5,7 @@ import schedule from "./data/schedule.json";
 import emptySchedule from "./data/empty_schedule.json";
 
 import CustomTable from "./components/CustomTable";
+import EmptyRoomsTable from "./components/EmptyRoomsTable";
 import Logo from "./navbar-icon.svg";
 import TwoSlotDisplay from "./components/TwoSlotDisplay";
 
@@ -67,6 +68,7 @@ function App() {
 
       <TwoSlotDisplay schedule={emptySchedule} />
 
+      <EmptyRoomsTable schedule={emptySchedule} />
       {Object.keys(schedule).map((key: string) => {
         return (
           <CustomTable room={key} schedule={schedule[key as keyof Schedule]} />
