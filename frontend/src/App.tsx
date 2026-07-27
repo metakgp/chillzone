@@ -17,6 +17,17 @@ function App() {
   const [show, setShow] = useState<boolean>(false);
 
   useEffect(() => {
+    const bypass =
+      import.meta.env.VITE_BYPASS_NETWORK_CHECK === "1" ||
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1";
+
+    if (bypass) {
+      setShow(true);
+      setLoading(false);
+      return;
+    }
+
     isInsideCampusNetwork()
       .then((value: boolean) => {
         setShow(value);
